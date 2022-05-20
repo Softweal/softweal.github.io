@@ -1,0 +1,29 @@
+
+
+
+# Site Name
+name: "Softweal"
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+collections:
+  authors:
+    output: true
+
+defaults:
+  - scope:
+      path: ""
+      type: "authors"
+    values:
+      layout: "author"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+    values:
+      layout: "default"

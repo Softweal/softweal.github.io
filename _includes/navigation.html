@@ -1,0 +1,32 @@
+<!--
+<nav>
+    {% for item in site.data.navigation %}
+    <a href="{{ item.link }}" {% if page.url == item.link %}style="color: red;" {% endif %}>
+        {{ item.name }}
+    </a>
+    {% endfor %}
+</nav>
+-->
+
+<section class="navigation">
+    <div class="nav-container">
+        <div class="brand">
+            <a href="/">{{ site.name }}</a>
+        </div>
+        <nav>
+            <div class="nav-mobile">
+                <a id="nav-toggle" href="#!"><span></span></a>
+            </div>
+            <ul class="nav-list">
+                {% for item in site.data.navigation %}
+                <li>
+                    <a href="{{ item.link }}" {% if page.url == item.link %}style="color: red;" {% endif %}>
+                        {{ item.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+
+</section>
