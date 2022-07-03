@@ -139,27 +139,50 @@ body {
 $font--color:#ffffff;
 $font--color--active:#000000;
 
-.site-content{
-	max-width: 1100px;
-	height: 100vh;
-	margin-left: auto;
-	margin-right: auto;
-	display: flex;
+.site-content {
+    max-width: 1100px;
+    height: 100vh;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
     flex-direction: column;
-	align-items: center;
-	justify-content: center;
+    align-items: center;
+    justify-content: center;
     color: $primary;
 
-    &__headline{
+    &__headline {
         font-size: 72pt;
     }
-    &__slugline{
+
+    &__slugline {
         font-size: 18pt;
     }
-    &__hr{
+
+    &__hr {
         width: 20%;
         height: 1px;
         background: $primary;
         margin: $spacer 0;
+    }
+}
+
+// Blog Site
+.blog-title {
+    font-size: 48pt;
+    color: $primary;
+}
+
+.posts {
+    .post {
+        $ref: &;
+
+        background: $background;
+        border-radius: $borderRadius;
+        padding: $spacer 0;
+        box-shadow: 0 10px 40px $shadow;
+
+        &__container {
+            padding: $spacer;
+        }
     }
 }
