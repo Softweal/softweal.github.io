@@ -5,6 +5,9 @@
 @import "_variables";
 @import "_reset";
 
-h1{
-    color: wheat;
+@import "_scroll";
+@import "_fonts";
+
+html{
+    scroll-behavior: smooth;
 }

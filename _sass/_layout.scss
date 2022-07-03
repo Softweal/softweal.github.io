@@ -1,187 +1,170 @@
+// Navbar
+$borderRadius: 10px;
+$spacer: 1rem;
+$background: #EBF6ED;
+$primary: #0c4040;
+$text: #6a778e;
+$white: #fff;
+$shadow: rgba(0, 0, 0, 0.2);
+$linkHeight: $spacer * 3.5;
+$timing: 250ms;
+$transition: $timing ease all;
 
-
-$content-width: 1000px;
-$breakpoint: 799px;
-$nav-height: 70px;
-$nav-background: #fff;
-$nav-font-color: #0c0c0c;
-$link-hover-color: #f8b500;
-
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
-
-body{
-  font-family: 'Poppins'
-}
-
-.navigation {
-  height: $nav-height;
-  background: $nav-background;
-}
-
-.nav-container {
-  max-width: $content-width;
-  margin: 0 auto;
-}
-
-.brand {
-  position: absolute;
-  padding-left: 20px;
-  float: left;
-  line-height: $nav-height;
-  text-transform: uppercase;
-  font-size: 1.4em;
-  
-  &:hover{
-    
-  }
-
-  a,
-  a:visited {
-    color: $nav-font-color;
-    text-decoration: none;
-  }
-}
-
-nav {
-  float: right;
-  ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    li {
-      float: left;
-      position: relative;
-      a {
-        display: block;
-        padding: 10px 20px 0 20px;
-        line-height: 50px;
-        background: $nav-background;
-        color: $nav-font-color;
-        text-decoration: none;
-        
-        
-         &::before {
-           transition: 300ms;
-           height: 5px;
-           content: "";
-           position: absolute;
-           background-color: $link-hover-color;
-           width: 0%;
-           bottom: 0px;
+@mixin gooeyEffect($i) {
+    @keyframes gooeyEffect-#{$i} {
+        0% {
+            transform: scale(1, 1);
         }
 
-        &:hover::before{
-          width: 70%;
+        50% {
+            transform: scale(0.5, 1.5);
         }
-        &:not(:only-child):after {
-          padding-left: 4px;
-          content: ' ▾';
+
+        100% {
+            transform: scale(1, 1);
         }
-      } // Dropdown list
-      ul li {
-        min-width: 190px;
-        a {
-          padding: 15px;
-          line-height: 20px;
-        }
-      }
     }
-  }
 }
 
-
-.nav-dropdown {
-  display: none;
-  position: absolute;
-  z-index: 1;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+body {
+    background: $background;
+    height: 200vh;
 }
 
-.nav-mobile {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: $nav-background;
-  height: $nav-height;
-  width: $nav-height;
-}
+.navbar {
+    $ref: &;
+    position: fixed;
+    top: $spacer;
+    left: $spacer;
+    background: $background;
+    border-radius: $borderRadius;
+    padding: $spacer 0;
+    box-shadow: 0 10px 40px $shadow;
+    height: calc(100vh - #{$spacer*4});
 
-@media only screen and (max-width: $breakpoint) {
-  .nav-mobile {
-    display: block;
-  }
-  nav {
-      width: 100%;
-      padding: $nav-height 0 15px;
-    ul {
-      display: none;
-      
-      li{
-        float: none;
-        
-        a {
-          padding: 15px;
-          line-height: 20px;
-          
-          &:hover::before{
-            width: 20%;
-          }
+    &__link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: $linkHeight;
+        width: $spacer * 5.5;
+        color: $text;
+        transition: $transition;
+
+        span {
+            position: absolute;
+            left: 100%;
+            transform: translate(-($spacer*3));
+            opacity: 0;
+            color: $primary;
+            background: $white;
+            padding: $spacer *0.75;
+            transition: $transition;
+            border-radius: $borderRadius * 1.75;
         }
-        ul li a {
-          padding-left: 30px;
+
+        &:hover {
+            color: $white;
+
+            span {
+                opacity: 1;
+                transform: translate(0);
+            }
         }
-      }
     }
-  }
-  .nav-dropdown {
-    position: static;
-  }
+
+    &__menu {
+        position: relative;
+    }
+
+    &__item {
+        &:last-child {
+            &:before {
+                content: '';
+                position: absolute;
+                opacity: 0;
+                z-index: -1;
+                top: 0;
+                left: $spacer;
+                width: $linkHeight;
+                height: $linkHeight;
+                background: $primary;
+                border-radius: $borderRadius * 1.75;
+                transition: $timing cubic-bezier(1, 0.2, 0.1, 1.2) all;
+            }
+        }
+
+        @for $i from 1 to 12 {
+
+            &:first-child:nth-last-child(#{$i}),
+            &:first-child:nth-last-child(#{$i})~li {
+                &:hover {
+                    ~li:last-child:before {
+                        opacity: 1;
+                    }
+                }
+
+                &:last-child:hover:before {
+                    opacity: 1;
+                }
+
+                @for $j from 1 to $i {
+
+                    &:nth-child(#{$j}):hover,
+                    &:nth-child(#{$j}):focus,
+                    &:nth-child(#{$j}):focus-within {
+                        ~li:last-child:before {
+                            @include gooeyEffect($j);
+                            top: (100% / $i) * ($j - 1);
+                            animation: gooeyEffect-#{$j} $timing 1;
+                        }
+                    }
+                }
+
+                &:last-child:hover:before,
+                &:last-child:focus:before,
+                &:last-child:focus-within:before {
+                    @include gooeyEffect($i);
+                    top: (100% / $i) * ($i - 1);
+                    animation: gooeyEffect-#{$i} $timing 1;
+                }
+            }
+        }
+    }
+
+    &__bottom {}
 }
 
-#nav-toggle {
-  position: absolute;
-  left: 18px;
-  top: 22px;
-  cursor: pointer;
-  padding: 10px 35px 16px 0px;
-  span,
-  span:before,
-  span:after {
-    cursor: pointer;
-    border-radius: 1px;
-    height: 5px;
-    width: 35px;
-    background: $link-hover-color;
-    position: absolute;
-    display: block;
-    content: '';
-    transition: all 300ms ease-in-out;
-  }
-  span:before {
-    top: -10px;
-  }
-  span:after {
-    bottom: -10px;
-  }
-  &.active span {
-    background-color: transparent;
-    &:before,
-    &:after {
-      top: 0;
-    }
-    &:before {
-      transform: rotate(45deg);
-    }
-    &:after {
-      transform: rotate(-45deg);
-    }
-  }
+.template {
+    margin-left: $spacer * 7;
+    margin-top: $spacer;
 }
 
-@media screen and (min-width: $breakpoint) {
-  .nav-list {
-    display: block !important;
-  }
+$font--color:#ffffff;
+$font--color--active:#000000;
+
+.site-content{
+	max-width: 1100px;
+	height: 100vh;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+    flex-direction: column;
+	align-items: center;
+	justify-content: center;
+    color: $primary;
+
+    &__headline{
+        font-size: 72pt;
+    }
+    &__slugline{
+        font-size: 18pt;
+    }
+    &__hr{
+        width: 20%;
+        height: 1px;
+        background: $primary;
+        margin: $spacer 0;
+    }
 }

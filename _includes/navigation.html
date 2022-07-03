@@ -6,7 +6,7 @@
     </a>
     {% endfor %}
 </nav>
--->
+
 
 <section class="navigation">
     <div class="nav-container">
@@ -30,3 +30,33 @@
     </div>
 
 </section>
+
+
+in a element {% if page.url == item.link %}style="color: red;" {% endif %}
+
+ <li class="navbar__item">
+            <a href="#" class="navbar__link">
+
+            </a>
+        </li>
+-->
+
+<nav class="navbar">
+    <ul class="navbar__menu">
+        {% for item in site.data.navigation %}
+        <li class="navbar__item">
+            <a href="{{ item.link }}" class="navbar__link">
+                <i data-feather="{{ item.icon }}"></i>
+                <span>{{ item.name }}</span>
+            </a>
+        </li>
+        {% endfor %}
+
+        <li class="navbar__item navbar__bottom">
+            <a class="navbar__link">
+                <i data-feather="moon"></i>
+                <span>Karanlık Mod</span>
+            </a>
+        </li>
+    </ul>
+</nav>

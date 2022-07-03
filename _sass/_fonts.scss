@@ -1,0 +1,14 @@
+//@import "/assets/fonts/Comfortaa.ttf";
+//@import "/assets/fonts/Comfortaa-Bold.ttf";
+//@import "/assets/fonts/Comfortaa-Light.ttf";
+//@import "/assets/fonts/Comfortaa-Medium.ttf";
+//@import "/assets/fonts/Comfortaa-Regular.ttf";
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url(/assets/fonts/Comfortaa.ttf) format('truetype');
+}
+
+body {
+    font-family: 'Comfortaa';
+}
