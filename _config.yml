@@ -20,6 +20,11 @@ defaults:
       layout: "author"
   - scope:
       path: ""
+      type: "projects"
+    values:
+      layout: "project"
+  - scope:
+      path: ""
       type: "posts"
     values:
       layout: "post"

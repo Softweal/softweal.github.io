@@ -133,7 +133,7 @@ body {
         }
     }
 
-    &__bottom {}
+    // &__bottom {}
 }
 
 $font--color:#ffffff;
@@ -173,16 +173,30 @@ $font--color--active:#000000;
 }
 
 .posts {
+    margin-right: $spacer;
     .post {
         $ref: &;
-
         background: $background;
         border-radius: $borderRadius;
         padding: $spacer 0;
-        box-shadow: 0 10px 40px $shadow;
 
         &__container {
+            
+            margin-top: $spacer;
             padding: $spacer;
+            box-shadow: 0 10px 40px $shadow;
+            border-radius: $borderRadius;
+        }
+
+        &__title {
+            font-size: 28pt;
+            text-decoration: none;
+            color: $primary;
+        }
+        &__author{
+            font-size: 12pt;
+            text-decoration: none;
+            color: $primary;
         }
     }
 }
