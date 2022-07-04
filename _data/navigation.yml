@@ -1,4 +1,4 @@
-- name: Home
+- name: Anasayfa
   link: /
   icon: home
 
@@ -6,15 +6,15 @@
   link: /blog.html
   icon: archive
 
-- name: Projects
+- name: Projeler
   link: /projects.html
   icon: folder
 
-- name: Authors
+- name: Yazarlar
   link: /authors.html
   icon: users
 
-- name: About
+- name: Hakkımızda
   link: /about.html
   icon: info
 

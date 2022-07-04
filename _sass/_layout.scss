@@ -28,7 +28,6 @@ $transition: $timing ease all;
 
 body {
     background: $background;
-    height: 200vh;
 }
 
 .navbar {
@@ -132,10 +131,14 @@ body {
             }
         }
     }
-
-    // &__bottom {}
+}
+//  global styles
+.page-title {
+    font-size: clamp(40px, 10vw, 70px); 
+    color: $primary;
 }
 
+// Index.html
 $font--color:#ffffff;
 $font--color--active:#000000;
 
@@ -159,21 +162,31 @@ $font--color--active:#000000;
     }
 
     &__hr {
-        width: 20%;
+        width: 60%;
         height: 1px;
         background: $primary;
         margin: $spacer 0;
     }
+
+    &__root-blog {
+        margin-top: $spacer;
+        font-size: 36px;
+        color:$text;
+        transition:all .5s;
+        text-decoration: none;
+
+        &:hover {
+            transform: scale(1.05);
+            color: $primary;
+            text-decoration: underline;
+        }
+    }
 }
 
 // Blog Site
-.blog-title {
-    font-size: 48pt;
-    color: $primary;
-}
-
 .posts {
     margin-right: $spacer;
+
     .post {
         $ref: &;
         background: $background;
@@ -181,7 +194,7 @@ $font--color--active:#000000;
         padding: $spacer 0;
 
         &__container {
-            
+
             margin-top: $spacer;
             padding: $spacer;
             box-shadow: 0 10px 40px $shadow;
@@ -193,7 +206,8 @@ $font--color--active:#000000;
             text-decoration: none;
             color: $primary;
         }
-        &__author{
+
+        &__author {
             font-size: 12pt;
             text-decoration: none;
             color: $primary;
