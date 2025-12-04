@@ -1,6 +1,17 @@
 {
-  "tabWidth": 1,
-  "useTabs": false,
-  "plugins": ["prettier-plugin-tailwindcss"],
-  "tailwindStylesheet": "./_tailwind.css"
+  "plugins": ["@shopify/prettier-plugin-liquid", "prettier-plugin-tailwindcss"],
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "liquid-html"
+      }
+    },
+    {
+      "files": "*.md",
+      "options": {
+        "parser": "markdown"
+      }
+    }
+  ]
 }

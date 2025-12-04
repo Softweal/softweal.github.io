@@ -1,17 +1,19 @@
-<!--
-in a element {% if page.url == item.link %}style="color: red;" {% endif %}
--->
+<!-- in a element {% if page.url == item.link %}style="color: red;" {% endif %} -->
 
-
-<nav class="navbar">
-    <ul class="navbar__menu">
-        {% for item in site.data.navigation %}
-        <li class="navbar__item">
-            <a href="{{ item.link }}" class="navbar__link">
-                <i data-feather="{{ item.icon }}"></i>
-                <span>{{ item.name }}</span>
-            </a>
+<div class="navbar bg-base-100 shadow-sm bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+  <div class="flex-1">
+    <a class="btn btn-ghost bg-clifford text-xl">Softweal</a>
+  </div>
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1">
+      {% for item in site.data.navigation %}
+        <li>
+          <a href="{{ item.link }}" {% if page.url == item.link %}class="text-primary" {% endif %}>
+            <i data-feather="{{ item.icon }}"></i>
+            <span>{{ item.name }}</span>
+          </a>
         </li>
-        {% endfor %}
+      {% endfor %}
     </ul>
-</nav>
+  </div>
+</div>

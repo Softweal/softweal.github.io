@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "watch:css": "tailwindcss -i ./assets/css/styles.css -o ./assets/css/app.css --watch",
+    "build:css": "tailwindcss -i ./assets/css/styles.css -o ./assets/css/app.css --minify"
+  },
+  "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.10.0",
+    "daisyui": "^5.5.8",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.1.17",
+    "tailwindcss": "^4.1.17"
+  }
+}
