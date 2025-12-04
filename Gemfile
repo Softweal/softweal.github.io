@@ -13,15 +13,12 @@ group :jekyll_plugins do
   gem "jekyll-feed"
   gem "jekyll-sitemap"
   gem "jekyll-seo-tag"
-  gem "jekyll-tailwind"
   gem "jemoji"
   gem "jekyll-paginate-v2"
   gem "jekyll-tagging"
   gem 'jekyll-spaceship'
   gem 'jekyll-date-localization'
 end
-
-gem "tailwindcss-ruby", "~> 4.1"
 
 platforms :mingw, :x64_mingw, :mswin, :jruby do
   gem "tzinfo", "~> 1.2"
