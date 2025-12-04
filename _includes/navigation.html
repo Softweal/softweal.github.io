@@ -1,6 +1,6 @@
 <!-- in a element {% if page.url == item.link %}style="color: red;" {% endif %} -->
 
-<div class="navbar bg-base-100 shadow-sm bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10">
+<div class="navbar sticky top-0 shadow-sm bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-20 z-50">
   <div class="flex-1">
     <a class="btn btn-ghost bg-clifford text-xl">Softweal</a>
   </div>
@@ -8,8 +8,8 @@
     <ul class="menu menu-horizontal px-1">
       {% for item in site.data.navigation %}
         <li>
-          <a href="{{ item.link }}" {% if page.url == item.link %}class="text-primary" {% endif %}>
-            <i data-feather="{{ item.icon }}"></i>
+          <a href="{{ item.link }}" class="btn-outline {% if page.url == item.link %}text-primary{% endif %}">
+            <!--<i data-feather="{{ item.icon }}"></i>-->
             <span>{{ item.name }}</span>
           </a>
         </li>
