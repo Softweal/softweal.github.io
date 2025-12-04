@@ -1,5 +1,5 @@
 ---
-short_name: emrekayik
-name: Emre Kayık
+short_name: beratkoc
+name: Berat Koç
 position: Proje Yürütücüsü
 ---
