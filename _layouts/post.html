@@ -4,12 +4,32 @@ layout: default
 
 <h1>{{ page.title }}</h1>
 
-<p>
-  {{ page.date | date_to_string }}
-  {% assign author = site.authors | where: 'short_name', page.author | first %}
-  {% if author %}
-  - <a href="{{ author.url }}">{{ author.name }}</a>
-  {% endif %}
-</p>
-
-{{ content }}
+<main class="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased">
+  <div class="flex justify-between px-4 mx-auto max-w-screen-xl ">
+      <article class="mx-auto w-full max-w-2xl prose prose-sm sm:prose-base lg:prose-lg">
+          <header class="mb-4 lg:mb-6 not-prose">
+              <address class="flex items-center mb-6 not-italic">
+                  <div class="inline-flex items-center mr-3 text-sm text-primary">
+                    {% assign author = site.authors | where: 'short_name', page.author | first %}
+                      <img class="mr-4 w-16 h-16 rounded-full" src="/assets/avatars/{{ author.avatar }}" alt="{{ author.name }}">
+                      <div>
+                          {% if author %}
+                            <a href="{{ author.url }}" rel="author" class="text-xl font-bold">{{ author.name }}</a>
+                          {% endif %}
+                          <p class="text-base text-secondary">{{ author.bio }}</p>
+                          <p class="text-base text-secondary">
+                              {{ page.date | date: "%B %d, %Y" }}
+                          </p>
+                      </div>
+                  </div>
+              </address>
+              <h1 class="mb-4 text-3xl font-extrabold leading-tight text-primary lg:mb-6 lg:text-4xl">
+                  {{ page.title | escape }}
+              </h1>
+          </header>
+          <div>
+              {{ content }}
+          </div>
+      </article>
+  </div>
+</main>

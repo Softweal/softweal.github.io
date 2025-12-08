@@ -2,26 +2,36 @@
 layout: default
 title: Softwale - Blog
 ---
-<div>
-  <h1 class="page-title">Bloglar</h1>
-  <ul class="posts">
-    <div class="post">
-      {% for post in site.posts %}
-      <li class="post__container">
-        <a class="post__title" href="{{ post.url }}">
-          {{ post.title }}
-        </a>
-        {{ post.date | date_to_string }}
 
-        {% if post.author %}
-        - <a class="post__author" href="/authors/{{ post.author }}">
-          {{ post.author }}
-        </a>
-        {% endif %}
+<section class="bg-base-100 min-h-screen">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+      <div class="mx-auto max-w-screen-sm text-center lg:mb-16 mb-8">
+          <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-primary">Bloglarımız</h2>
+      </div>
+      <div class="grid gap-8 lg:grid-cols-2">
+              {% for post in site.posts %}
+              <article class="card p-6 bg-base-100 rounded-lg border border-border shadow-md">
+                  <div class="flex justify-between items-center mb-5 text-primary-conten">
+                      <h2 class="mb-2 text-2xl font-bold tracking-tight text-primary">
+                          {{ post.title }}
+                      </h2>
+                      <span class="text-sm">{{ post.date | date: "%B %d, %Y" }}</span>
+                  </div>
 
-        {{ post.excerpt }}
-      </li>
-      {% endfor %}
-    </div>
-  </ul>
-</div>
+                  <p class="mb-5 font-light text-primary">{{ post.description }}</p>
+                  <div class="flex justify-between items-center">
+                      <div class="flex items-center space-x-4">
+                          <span class="font-medium">
+                              {{ post.author }}
+                          </span>
+                      </div>
+                      <a href="{{ post.url }}" class="inline-flex items-center font-medium text-primary-600 dark:text-primary-500 hover:underline">
+                          Daha fazla oku
+                          <i class="ai-arrow-right"></i>
+                      </a>
+                  </div>
+              </article>
+              {% endfor %}
+      </div>
+  </div>
+</section>
