@@ -2,7 +2,8 @@
 layout: default
 title: Softweal
 ---
-<div class="group relative flex min-h-screen w-full items-center justify-center overflow-hidden">
+<div class="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
+    <div class="group">
   <div
     class="
       bg-primary group-hover:bg-accent
@@ -16,14 +17,15 @@ title: Softweal
       blur-[100px]
       transition-all
       duration-1000 group-hover:opacity-70 group-hover:blur-[120px]
+      group-hover:scale-110
     "
   ></div>
   <div class="relative z-10 px-8 text-center">
     <h1
       class="
         font-anton
-        from-primary
-        to-accent
+        from-secondary
+        to-primary
         text-primary
         mb-4 transform
         bg-gradient-to-r
@@ -41,24 +43,101 @@ title: Softweal
     >
       SOFTWEAL
     </h1>
-    <h2
-      class="
-        text-primary font-momo
-        text-3xl
-        md:text-xl
-      "
-    >
-      improve your web experiences
-    </h2>
+
+      <div
+          x-data="{
+              text: '',
+              textArray : ['improve your web experiences', 'Web AI', 'AR-XR'],
+              textIndex: 0,
+              charIndex: 0,
+              typeSpeed: 110,
+              cursorSpeed: 550,
+              pauseEnd: 1500,
+              pauseStart: 20,
+              direction: 'forward',
+          }"
+          x-init="$nextTick(() => {
+              let typingInterval = setInterval(startTyping, $data.typeSpeed);
+
+              function startTyping(){
+                  let current = $data.textArray[ $data.textIndex ];
+
+                  // check to see if we hit the end of the string
+                  if($data.charIndex > current.length){
+                          $data.direction = 'backward';
+                          clearInterval(typingInterval);
+
+                          setTimeout(function(){
+                              typingInterval = setInterval(startTyping, $data.typeSpeed);
+                          }, $data.pauseEnd);
+                  }
+
+                  $data.text = current.substring(0, $data.charIndex);
+
+                  if($data.direction == 'forward')
+                  {
+                      $data.charIndex += 1;
+                  }
+                  else
+                  {
+                      if($data.charIndex == 0)
+                      {
+                          $data.direction = 'forward';
+                          clearInterval(typingInterval);
+                          setTimeout(function(){
+                              $data.textIndex += 1;
+                              if($data.textIndex >= $data.textArray.length)
+                              {
+                                  $data.textIndex = 0;
+                              }
+                              typingInterval = setInterval(startTyping, $data.typeSpeed);
+                          }, $data.pauseStart);
+                      }
+                      $data.charIndex -= 1;
+                  }
+              }
+
+              setInterval(function(){
+                  if($refs.cursor.classList.contains('hidden'))
+                  {
+                      $refs.cursor.classList.remove('hidden');
+                  }
+                  else
+                  {
+                      $refs.cursor.classList.add('hidden');
+                  }
+              }, $data.cursorSpeed);
+
+          })"
+          class="flex items-center justify-center mx-auto text-center max-w-7xl min-h-20">
+          <div class="relative flex items-center justify-center h-auto">
+              <p class="text-2xl font-black leading-tight text-primary font-momo
+              md:text-xl
+              group-hover:scale-110
+              bg-gradient-to-r
+              bg-clip-text
+              to-secondary
+              from-primary
+              transition-all
+              duration-1000
+              ease-in-out
+              group-hover:text-transparent" x-text="text"></p>
+              <span class="absolute right-0 w-1 -mr-2 bg-primary h-full" x-ref="cursor"></span>
+          </div>
+      </div>
 
     <div class="text-primary text-md mx-auto mt-16 max-w-4xl leading-relaxed">
       <p>© {{ 'now' | date: '%Y' }}</p>
     </div>
   </div>
+  </div>
 </div>
 
-<div class="bg-base-100 relative flex min-h-screen w-full justify-center overflow-hidden">
+<div class="bg-base-100 relative flex min-h-screen w-full justify-center overflow-hidden select-none">
   <div class="flex w-full max-w-6xl flex-col items-center justify-center gap-16 p-8">
+      <h1 class="text-3xl text-center">
+          Yazarlarımız
+      </h1>
     {% for author in site.authors reversed %}
       <div
         class="card-animate card md:card-side bg-base-200 w-full opacity-0 shadow-xl"
@@ -78,6 +157,35 @@ title: Softweal
       </div>
     {% endfor %}
   </div>
+</div>
+<div
+    x-data
+    x-init="
+            $nextTick(() => {
+                const content = $refs.content;
+                const item = $refs.item;
+                const clone = item.cloneNode(true);
+                content.appendChild(clone);
+            });
+    "
+    class="relative w-full container-block select-none space-y-4"
+    >
+        <h1 class="text-3xl text-center">
+            Sponsorlarımız
+        </h1>
+        <div class="relative w-full py-3 mx-auto overflow-hidden text-lg italic tracking-wide text-primary-content uppercase bg-secondary max-w-7xl sm:text-xs md:text-sm lg:text-base xl:text-xl 2xl:text-2xl">
+            <div class="absolute left-0 z-20 w-40 h-full bg-gradient-to-r from-secondary to-transparent"></div>
+            <div class="absolute right-0 z-20 w-40 h-full bg-gradient-to-l from-secondary to-transparent"></div>
+            <div x-ref="content" class="flex animate-marquee">
+                <div x-ref="item" class="flex items-center justify-around flex-shrink-0 w-full py-2 space-x-2 text-white">
+                    {% for i in (1..3) %}
+                    <span class="text-sm">
+                        lütfen sponsor olmak için iletişime geçin
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
