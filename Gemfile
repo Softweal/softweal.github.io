@@ -15,7 +15,7 @@ group :jekyll_plugins do
   gem "jekyll-seo-tag"
   gem "jemoji"
   gem "jekyll-paginate-v2"
-  gem "jekyll-tagging"
+  #gem "jekyll-tagging"
   gem 'jekyll-spaceship'
   gem 'jekyll-date-localization'
 end
