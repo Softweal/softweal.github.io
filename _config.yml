@@ -43,6 +43,9 @@ kramdown:
   input: GFM
   hard_wrap: false
 
+include:
+  - assets/css/main.css
+
 exclude:
   - Gemfile
   - Gemfile.lock
