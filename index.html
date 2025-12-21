@@ -3,9 +3,8 @@ layout: default
 title: Softweal
 ---
 <div class="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
-    <div class="group">
-  <div
-    class="
+  <div class="group">
+    <div class="
       bg-primary group-hover:bg-accent
       absolute
       top-1/2 left-1/2
@@ -18,11 +17,9 @@ title: Softweal
       transition-all
       duration-1000 group-hover:opacity-70 group-hover:blur-[120px]
       group-hover:scale-110
-    "
-  ></div>
-  <div class="relative z-10 px-8 text-center">
-    <h1
-      class="
+    "></div>
+    <div class="relative z-10 px-8 text-center">
+      <h1 class="
         font-anton
         from-secondary
         to-primary
@@ -39,13 +36,11 @@ title: Softweal
         group-hover:scale-110
         group-hover:text-transparent
         md:text-5xl
-      "
-    >
-      SOFTWEAL
-    </h1>
+      ">
+        SOFTWEAL
+      </h1>
 
-      <div
-          x-data="{
+      <div x-data="{
               text: '',
               textArray : [
               'improve your web experiences',
@@ -60,8 +55,7 @@ title: Softweal
               pauseEnd: 1500,
               pauseStart: 20,
               direction: 'forward',
-          }"
-          x-init="$nextTick(() => {
+          }" x-init="$nextTick(() => {
               let typingInterval = setInterval(startTyping, $data.typeSpeed);
 
               function startTyping(){
@@ -113,10 +107,9 @@ title: Softweal
                   }
               }, $data.cursorSpeed);
 
-          })"
-          class="flex items-center justify-center mx-auto text-center max-w-7xl min-h-20">
-          <div class="relative flex items-center justify-center h-auto">
-              <p class="text-2xl font-black leading-tight text-primary font-momo
+          })" class="flex items-center justify-center mx-auto text-center max-w-7xl min-h-20">
+        <div class="relative flex items-center justify-center h-auto">
+          <p class="text-2xl font-black leading-tight text-primary font-momo
               md:text-xl
               group-hover:scale-110
               bg-gradient-to-r
@@ -127,117 +120,93 @@ title: Softweal
               duration-1000
               ease-in-out
               group-hover:text-transparent" x-text="text"></p>
-              <span class="absolute right-0 w-1 -mr-2 bg-primary h-full" x-ref="cursor"></span>
-          </div>
+          <span class="absolute right-0 w-1 -mr-2 bg-primary h-full" x-ref="cursor"></span>
+        </div>
       </div>
 
-    <div class="text-primary text-md mx-auto mt-16 max-w-4xl leading-relaxed">
-      <p>© {{ 'now' | date: '%Y' }}</p>
-    </div>
+      <div class="text-primary text-md mx-auto mt-16 max-w-4xl leading-relaxed">
+        <p>© {{ 'now' | date: '%Y' }}</p>
+      </div>
 
-  </div>
+    </div>
   </div>
 </div>
 
 <div class="bg-base-100 relative flex min-h-screen w-full justify-center overflow-hidden select-none">
   <div class="flex w-full max-w-6xl flex-col items-center justify-center gap-16 p-8">
-      <h1 class="text-3xl text-center">
-          Yazarlarımız
-      </h1>
+    <h1 class="text-3xl text-center">
+      Yazarlarımız
+    </h1>
     {% for author in site.authors reversed %}
-      <div
-        class="card-animate card md:card-side bg-base-200 w-full opacity-0 shadow-xl"
-        data-direction="{% cycle 'left', 'right', 'left' %}"
-      >
-        <figure class="md:w-1/3">
-          <img
-            src="/assets/avatars/{{ author.avatar }}"
-            alt="Album"
-            class="h-full w-full object-cover"
-          >
-        </figure>
-        <div class="card-body md:w-2/3">
-          <h2 class="card-title text-2xl">{{ author.name }}</h2>
-          <p>{{ author.bio }}</p>
-        </div>
+    <div class="card-animate card md:card-side bg-base-200 w-full opacity-0 shadow-xl"
+      data-direction="{% cycle 'left', 'right', 'left' %}">
+      <figure class="md:w-1/3">
+        <img src="/assets/avatars/{{ author.avatar }}" alt="Album" class="h-full w-full object-cover">
+      </figure>
+      <div class="card-body md:w-2/3">
+        <h2 class="card-title text-2xl">{{ author.name }}</h2>
+        <p>{{ author.bio }}</p>
       </div>
+    </div>
     {% endfor %}
   </div>
 </div>
-<div
-    x-data
-    x-init="
+<div x-data x-init="
             $nextTick(() => {
                 const content = $refs.content;
                 const item = $refs.item;
                 const clone = item.cloneNode(true);
                 content.appendChild(clone);
             });
-    "
-    class="relative w-full container-block select-none space-y-4"
-    >
-        <h1 class="text-3xl text-center">
-            Sponsorlarımız
-        </h1>
-        <div class="relative w-full py-3 mx-auto overflow-hidden text-lg italic tracking-wide text-primary-content uppercase bg-secondary max-w-7xl sm:text-xs md:text-sm lg:text-base xl:text-xl 2xl:text-2xl">
-            <div class="absolute left-0 z-20 w-40 h-full bg-gradient-to-r from-secondary to-transparent"></div>
-            <div class="absolute right-0 z-20 w-40 h-full bg-gradient-to-l from-secondary to-transparent"></div>
-            <div x-ref="content" class="flex animate-marquee">
-                <div x-ref="item" class="flex items-center justify-around flex-shrink-0 w-full py-2 space-x-2 text-white">
-                    {% for i in (1..3) %}
-                    <span class="text-sm">
-                        lütfen sponsor olmak için iletişime geçin
-                    </span>
-                {% endfor %}
-            </div>
-        </div>
+    " class="relative w-full container-block select-none space-y-4">
+  <h1 class="text-3xl text-center">
+    Sponsorlarımız
+  </h1>
+  <div
+    class="relative w-full py-3 mx-auto overflow-hidden text-lg italic tracking-wide text-primary-content uppercase bg-secondary max-w-7xl sm:text-xs md:text-sm lg:text-base xl:text-xl 2xl:text-2xl">
+    <div class="absolute left-0 z-20 w-40 h-full bg-gradient-to-r from-secondary to-transparent"></div>
+    <div class="absolute right-0 z-20 w-40 h-full bg-gradient-to-l from-secondary to-transparent"></div>
+    <div x-ref="content" class="flex animate-marquee">
+      <div x-ref="item" class="flex items-center justify-around flex-shrink-0 w-full py-2 space-x-2 text-white">
+        {% for i in (1..3) %}
+        <span class="text-sm">
+          lütfen sponsor olmak için iletişime geçin
+        </span>
+        {% endfor %}
+      </div>
     </div>
+  </div>
 </div>
 
 <script>
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smooth: true,
-  });
-
-  lenis.on('scroll', (e) => {
-    // console.log(e);
-  });
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-
-  requestAnimationFrame(raf);
-
   // GSAP ScrollTrigger animations for cards
-  gsap.registerPlugin(ScrollTrigger);
+  // Ensure GSAP and ScrollTrigger are registered (they are loaded in head)
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
 
-  document.querySelectorAll('.card-animate').forEach((card) => {
-    const direction = card.dataset.direction;
-    const xStart = direction === 'left' ? -100 : 100;
+    document.querySelectorAll('.card-animate').forEach((card) => {
+      const direction = card.dataset.direction;
+      const xStart = direction === 'left' ? -100 : 100;
 
-    gsap.fromTo(
-      card,
-      {
-        x: xStart,
-        opacity: 0,
-      },
-      {
-        x: 0,
-        opacity: 1,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 80%',
-          end: 'top 20%',
-          toggleActions: 'play none none reverse',
-          // markers: true, // uncomment for debugging
+      gsap.fromTo(
+        card,
+        {
+          x: xStart,
+          opacity: 0,
         },
-      },
-    );
-  });
+        {
+          x: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            end: 'top 20%',
+            toggleActions: 'play none none reverse',
+          },
+        },
+      );
+    });
+  }
 </script>

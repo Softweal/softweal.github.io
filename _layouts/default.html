@@ -1,25 +1,27 @@
 <!doctype html>
 <html lang="{{ site.lang | default: 'en-US' }}" data-theme="softweal">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ site.title }}</title>
 
-    {% include resources.html %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ site.title }}</title>
 
-    {{ page.head | default: '' }}
-    {% seo %}
-  </head>
+  {% include head.html %}
 
-  <body>
-    {% include navigation.html %}
-    <div class="space-y-2">
-      {{ content }}
-    </div>
-    {% include footer.html %}
+  {{ page.head | default: '' }}
+  {% seo %}
+</head>
 
-    <script src="/assets/js/main.js"></script>
-  </body>
+<body>
+  {% include components/navbar.html %}
+  <div class="space-y-2">
+    {{ content }}
+  </div>
+  {% include components/footer.html %}
+
+  <script src="/assets/js/main.js"></script>
+</body>
+
 </html>

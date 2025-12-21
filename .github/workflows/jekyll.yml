@@ -21,36 +21,31 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 1. Adım: Node.js Kurulumu (Tailwind için gerekli)
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
 
-      # 2. Adım: NPM Bağımlılıklarını Yükle
       - name: Install Node Dependencies
         run: npm ci
 
-      # 3. Adım: Tailwind CSS Derlemesi (CI için --watch olmadan)
       - name: Build Tailwind CSS
         run: npm run build:css
 
-      # 4. Adım: Ruby Kurulumu
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.4.4"
+          ruby-version: "3.3" # Using a stable version
           bundler-cache: true
 
-      # 5. Adım: Jekyll Build (CSS oluştuktan sonra çalışmalı)
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
       - name: Build with Jekyll
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
