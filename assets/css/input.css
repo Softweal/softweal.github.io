@@ -15,6 +15,17 @@
     --font-momo: 'Momo Trust Display', sans-serif;
 }
 
+/* Mobile Typography Adjustments */
+@layer utilities {
+    .text-responsive-h1 {
+        @apply text-5xl md:text-7xl lg:text-8xl;
+    }
+
+    .text-responsive-h2 {
+        @apply text-3xl md:text-5xl;
+    }
+}
+
 @plugin "daisyui/theme" {
     name: "light";
     default: false;
