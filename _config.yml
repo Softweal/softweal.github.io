@@ -11,6 +11,8 @@ date_locale: tr
 collections:
   authors:
     output: true
+  projects:
+    output: true
 
 permalink: /blog/:title.html
 

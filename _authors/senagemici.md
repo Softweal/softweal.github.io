@@ -4,4 +4,3 @@ name: Sena Gemiçi
 position: Proje Yürütücüsü
 avatar: sena.jpeg
 ---
-

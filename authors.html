@@ -1,17 +1,117 @@
 ---
 layout: default
-title: Authors
+title: Yazarlar
 ---
-<div>
-  <h1 class="page-title">Yazarlar</h1>
 
-  <ul>
-    {% for author in site.authors %}
-      <li>
-        <h2><a href="{{ author.url }}">{{ author.name }}</a></h2>
-        <h3>{{ author.position }}</h3>
-        <p>{{ author.content | markdownify }}</p>
-      </li>
-    {% endfor %}
-  </ul>
+<!-- Background Ambient Elements -->
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+  <div
+    class="absolute width-[600px] height-[600px] top-0 left-1/3 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] opacity-40 animate-pulse">
+  </div>
+  <div
+    class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] opacity-40 animate-pulse"
+    style="animation-delay: 2s;"></div>
 </div>
+
+<div class="container mx-auto px-4 min-h-screen pt-24 pb-16">
+
+  <!-- Header Section -->
+  <div class="text-center mb-20 relative">
+    <h1
+      class="font-anton text-6xl md:text-8xl mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent inline-block hover:scale-105 transition-transform duration-500 cursor-default">
+      YAZARLARIMIZ
+    </h1>
+    <p class="text-xl text-base-content/60 max-w-2xl mx-auto font-light">
+      Softweal'in arkasındaki yaratıcı zihinler ve teknoloji tutkunları.
+    </p>
+  </div>
+
+  <!-- Authors Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {% for author in site.authors %}
+    <div class="card-animate opacity-0 h-full">
+      <div
+        class="card h-full bg-base-100/40 backdrop-blur-md border border-white/10 shadow-xl hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 transition-all duration-500 overflow-hidden">
+        <a href="{{ author.url }}" class="flex flex-col h-full w-full">
+          <figure
+            class="relative h-32 w-full m-0 p-0 bg-gradient-to-br from-primary/10 via-base-200 to-secondary/10 overflow-hidden">
+            <div class="absolute inset-0 opacity-30 pattern-grid-lg"></div>
+            <div
+              class="absolute -right-10 -top-10 w-40 h-40 bg-primary/20 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700">
+            </div>
+          </figure>
+
+          <!-- Avatar Section - Overlapping -->
+          <div class="w-full flex justify-center -mt-16 z-20">
+            <div
+              class="w-32 h-32 rounded-full p-1 bg-base-100 shadow-lg relative transition-transform duration-500 hover:scale-105">
+              {% if author.avatar %}
+              <img src="/assets/avatars/{{ author.avatar }}" alt="{{ author.name }}"
+                class="w-full h-full object-cover rounded-full">
+              {% else %}
+              <div
+                class="w-full h-full bg-base-200 rounded-full flex items-center justify-center text-4xl font-anton text-primary">
+                {{ author.name | slice: 0 }}
+              </div>
+              {% endif %}
+              <div class="absolute bottom-2 right-2 w-6 h-6 bg-green-500 border-4 border-base-100 rounded-full"></div>
+            </div>
+          </div>
+
+          <div class="card-body items-center text-center pt-4 flex-grow h-full">
+            <h2
+              class="card-title font-anton text-3xl justify-center hover:text-primary transition-colors duration-300 min-h-[4rem] items-center">
+              {{ author.name }}
+            </h2>
+
+            <div class="min-h-[2rem] flex items-center justify-center w-full">
+              {% if author.position %}
+              <div class="badge badge-primary badge-outline opacity-70">{{ author.position }}</div>
+              {% endif %}
+            </div>
+
+            <p class="text-base-content/70 font-light leading-relaxed line-clamp-3 min-h-[4.5rem]">
+              {% if author.content %}
+              {{ author.content | strip_html | truncatewords: 25 }}
+              {% else %}
+              Teknoloji ve yazılım dünyasındaki deneyimlerini paylaşıyor.
+              {% endif %}
+            </p>
+
+            <div class="card-actions justify-center w-full mt-auto pt-6 border-t border-white/10">
+              <span
+                class="text-sm font-bold text-secondary hover:tracking-widest transition-all duration-300 flex items-center justify-center gap-2">
+                PROFİLİ GÖR <i class="ai-arrow-right"></i>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<!-- Interactive Scripts -->
+<script>
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Staggered animation for grid
+    gsap.to(".card-animate", {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.15,
+      ease: "back.out(1.2)",
+      scrollTrigger: {
+        trigger: ".container",
+        start: "top 85%"
+      }
+    });
+
+    // Initial setup for animation
+    gsap.set(".card-animate", { y: 60, opacity: 0 });
+  }
+</script>

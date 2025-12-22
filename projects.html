@@ -1,8 +1,167 @@
 ---
 layout: default
-title: Softweal - Projects
+title: Projeler
+permalink: /projects/
 ---
 
-<div>
-    <h1 class="page-title">Projeler</h1>
+<!-- Background Ambient Elements -->
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+    <div
+        class="absolute top-[20%] left-[20%] w-96 h-96 bg-primary/20 rounded-full blur-[120px] opacity-30 animate-pulse">
+    </div>
+    <div class="absolute bottom-[20%] right-[20%] w-96 h-96 bg-accent/20 rounded-full blur-[120px] opacity-30 animate-pulse"
+        style="animation-delay: 2s;"></div>
 </div>
+
+<div class="container mx-auto px-4 min-h-screen pt-24 pb-16">
+
+    <!-- Header Section -->
+    <div class="text-center mb-16 relative">
+        <h1
+            class="font-anton text-6xl md:text-8xl mb-4 bg-gradient-to-r from-accent via-primary to-secondary bg-clip-text text-transparent inline-block hover:scale-105 transition-transform duration-500 cursor-default">
+            PROJELERİMİZ
+        </h1>
+        <p class="text-xl text-base-content/60 max-w-2xl mx-auto font-light mt-4">
+            Geleceği şekillendiren dijital çözümler ve başarı hikayelerimiz.
+        </p>
+    </div>
+
+    <!-- Featured Project (First Item) -->
+    {% assign featured = site.projects.first %}
+    {% if featured %}
+    <div class="mb-16 card-animate opacity-0">
+        <a href="{{ featured.url }}"
+            class="group relative block overflow-hidden rounded-3xl border border-white/10 dark:border-white/5 shadow-2xl hover:shadow-accent/20 transition-all duration-500">
+            <!-- Background Blob -->
+            <div
+                class="absolute -left-20 -bottom-20 w-96 h-96 bg-secondary/20 rounded-full blur-[80px] group-hover:bg-secondary/30 transition-all duration-500">
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-0 relative z-10 bg-base-100/40 backdrop-blur-md">
+                <div class="h-64 md:h-auto overflow-hidden relative bg-base-200 order-1">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/20 group-hover:opacity-0 transition-opacity duration-500 z-10">
+                    </div>
+                    <div
+                        class="w-full h-full flex items-center justify-center bg-base-300 group-hover:scale-110 transition-transform duration-1000">
+                        {% if featured.image %}
+                        <img src="{{ featured.image }}" alt="{{ featured.title }}" class="w-full h-full object-cover">
+                        {% else %}
+                        <span class="font-anton text-9xl opacity-10 select-none">{{ featured.title | slice: 0 }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="p-8 md:p-12 flex flex-col justify-center h-full order-2">
+                    <div class="flex items-center gap-3 mb-4 text-sm font-bold tracking-widest text-accent uppercase">
+                        <span class="badge badge-accent badge-outline">SON PROJE</span>
+                    </div>
+                    <h2
+                        class="font-anton text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight group-hover:text-accent transition-colors duration-300">
+                        {{ featured.title }}
+                    </h2>
+                    <p class="text-lg text-base-content/70 mb-8 line-clamp-3 font-light">
+                        {{ featured.description }}
+                    </p>
+
+                    {% if featured.technologies %}
+                    <div class="flex flex-wrap gap-2 mb-8">
+                        {% for tech in featured.technologies %}
+                        <span class="badge badge-outline opacity-60">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div
+                        class="flex items-center gap-2 text-primary font-bold group-hover:translate-x-2 transition-transform duration-300">
+                        İNCELE
+                        <i class="ai-arrow-right"></i>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- Divider -->
+    <div class="flex items-center gap-4 mb-12 opacity-50">
+        <div class="h-px bg-current flex-1"></div>
+        <span class="font-momo text-sm">TÜM PROJELER</span>
+        <div class="h-px bg-current flex-1"></div>
+    </div>
+
+    <!-- Other Projects Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for project in site.projects offset:1 %}
+        <article
+            class="card-animate opacity-0 group flex flex-col h-full bg-base-100/50 backdrop-blur-sm border border-base-content/5 rounded-2xl overflow-hidden hover:border-accent/50 transition-colors duration-300 shadow-lg hover:shadow-xl">
+            <a href="{{ project.url }}" class="block overflow-hidden relative h-48 bg-base-200">
+                <div
+                    class="absolute inset-0 flex items-center justify-center text-accent/10 group-hover:text-accent/20 transition-colors duration-500">
+                    {% if project.image %}
+                    <img src="{{ project.image }}" alt="{{ project.title }}"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    {% else %}
+                    <span class="font-anton text-8xl">{{ project.title | slice: 0 }}</span>
+                    {% endif %}
+                </div>
+                <div class="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-60"></div>
+            </a>
+
+            <div class="p-6 flex flex-col flex-1">
+                <div class="mb-auto">
+                    <h3 class="font-anton text-2xl mb-3 leading-snug group-hover:text-accent transition-colors">
+                        <a href="{{ project.url }}">
+                            {{ project.title }}
+                        </a>
+                    </h3>
+                    <p class="text-sm text-base-content/60 line-clamp-3">
+                        {{ project.description }}
+                    </p>
+                </div>
+
+                {% if project.technologies %}
+                <div class="mt-4 flex flex-wrap gap-1">
+                    {% for tech in project.technologies limit:3 %}
+                    <span
+                        class="text-[10px] uppercase font-bold text-base-content/40 bg-base-content/5 px-2 py-1 rounded">{{
+                        tech }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="mt-6 pt-4 border-t border-base-content/10 flex justify-end items-center">
+                    <a href="{{ project.url }}"
+                        class="btn btn-circle btn-sm btn-ghost group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                        <i class="ai-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- Interactive Scripts -->
+<script>
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Staggered animation for grid
+        gsap.to(".card-animate", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".container",
+                start: "top 80%"
+            }
+        });
+
+        // Initial setup for animation
+        gsap.set(".card-animate", { y: 100, opacity: 0 });
+    }
+</script>
