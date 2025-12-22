@@ -6,6 +6,8 @@ lang: "tr-TR"
 
 google_site_verification: "ZQRB3Uf52WeAvIUh8boo5FlRhP0UO-I9SfYT1arFoBA"
 
+date_locale: tr
+
 collections:
   authors:
     output: true
