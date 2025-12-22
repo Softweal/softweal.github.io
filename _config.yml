@@ -5,6 +5,8 @@ collections:
   authors:
     output: true
 
+permalink: /blog/:title.html
+
 defaults:
   - scope:
       path: ""
@@ -35,6 +37,10 @@ plugins:
   #- jekyll-tagging
   - jekyll-spaceship
   - jekyll-date-localization
+
+jekyll-date-localization:
+  locale: "tr_TR"
+  format: "%d %B %Y"
 
 highlighter: rouge
 
