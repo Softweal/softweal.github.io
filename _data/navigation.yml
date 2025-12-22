@@ -3,15 +3,15 @@
   icon: home
 
 - name: Blog
-  link: /blog/
+  link: /blog
   icon: archive
 
 - name: Projeler
-  link: /projects/
+  link: /projects
   icon: folder
 
 - name: Yazarlar
-  link: /authors/
+  link: /authors
   icon: users
 
 - name: Hakkımızda
