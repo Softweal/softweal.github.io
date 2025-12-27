@@ -7,8 +7,21 @@
   <div class="flex-none hidden lg:block">
     <ul class="menu menu-horizontal px-1">
       {% for item in site.data.navigation %}
+      
+      {% assign current_clean = page.url | remove: "index.html" | remove: ".html" %}
+      {% assign menu_clean = item.link | remove: "index.html" | remove: ".html" %}
+
+      {% comment %} 2. Adım: Her iki tarafın da sonuna '/' ekle ve çift '//' oluşursa teke düşür {% endcomment %}
+      {% assign current_norm = current_clean | append: "/" | replace: "//", "/" %}
+      {% assign menu_norm = menu_clean | append: "/" | replace: "//", "/" %}
+
+      {% assign is_active = false %}
+      {% if current_norm == menu_norm %}
+        {% assign is_active = true %}
+      {% endif %}
+      
       <li>
-        <a href="{{ item.link }}" class="btn-outline {% if page.url == item.link %}text-primary{% endif %}">
+        <a href="{{ item.link }}" class="btn-outline {% if is_active %}text-primary font-bold{% endif %}">
           <span>{{ item.name }}</span>
         </a>
       </li>
@@ -16,30 +29,7 @@
     </ul>
   </div>
 
-  <!-- Mobile Menu (Hidden on Desktop) -->
-  <div class="flex-none lg:hidden">
-    <details class="dropdown dropdown-end">
-      <summary class="btn btn-square btn-ghost m-1">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-          class="inline-block h-5 w-5 stroke-current">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
-          </path>
-        </svg>
-      </summary>
-      <ul class="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-        {% for item in site.data.navigation %}
-        <li>
-          <a href="{{ item.link }}" class="{% if page.url == item.link %}text-primary{% endif %}">
-            <span>{{ item.name }}</span>
-          </a>
-        </li>
-        {% endfor %}
-      </ul>
-    </details>
-  </div>
-
-  <div class="dropdown dropdown-end">
+  <div class="dropdown dropdown-end flex-none lg:hidden">
     <div tabindex="0" role="button" class="btn btn-ghost rounded-field">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
         class="inline-block h-5 w-5 stroke-current">

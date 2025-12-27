@@ -3,7 +3,6 @@ url: "https://softweal.space"
 description: "Softweal - Improve your web experiences"
 lang: "tr-TR"
 
-
 google_site_verification: "ZQRB3Uf52WeAvIUh8boo5FlRhP0UO-I9SfYT1arFoBA"
 
 date_locale: tr
@@ -50,6 +49,39 @@ plugins:
 jekyll-date-localization:
   locale: "tr_TR"
   format: "%d %B %Y"
+
+# Pagination Settings
+pagination:
+  enabled: true
+  debug: false
+  collection: "posts"
+  per_page: 6
+  permalink: "/page/:num/"
+  title: ":title - Sayfa :num"
+  limit: 0
+  sort_field: "date"
+  sort_reverse: true
+  trail:
+    before: 2
+    after: 2
+
+# AutoPages Settings
+autopages:
+  enabled: true
+  categories:
+    enabled: true
+    layouts:
+      - autopage_category.html
+    title: "Kategori: :cat"
+    permalink: "/category/:cat"
+  tags:
+    enabled: true
+    layouts:
+      - autopage_tags.html
+    title: "Etiket: :tag"
+    permalink: "/tag/:tag"
+  collections:
+    enabled: false
 
 highlighter: rouge
 

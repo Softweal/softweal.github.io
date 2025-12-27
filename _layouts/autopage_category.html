@@ -1,0 +1,88 @@
+---
+layout: default
+---
+
+<div class="container mx-auto px-4 min-h-screen pt-24 pb-16">
+
+    <div class="text-center mb-16 relative">
+        <h1 class="font-anton text-4xl md:text-6xl mb-4 text-primary inline-block uppercase">
+            {{ page.title }}
+        </h1>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {% for post in paginator.posts %}
+        <article class="card-animate group flex flex-col h-full bg-base-100/50 backdrop-blur-sm border border-base-content/5 rounded-2xl overflow-hidden hover:border-primary/50 transition-colors duration-300 shadow-lg hover:shadow-xl">
+            <a href="{{ post.url }}" class="block overflow-hidden relative h-48 bg-base-200">
+                <div class="absolute inset-0 flex items-center justify-center text-primary/10 group-hover:text-primary/20 transition-colors duration-500">
+                    <span class="font-anton text-8xl">{{ post.title | slice: 0 }}</span>
+                </div>
+                {% if post.image %}
+                    <img src="{{ post.image }}" alt="{{ post.title }}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                {% endif %}
+                <div class="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-60"></div>
+                <div class="absolute bottom-4 left-4">
+                    <span class="badge badge-sm badge-neutral font-momo">{{ post.date | date_to_string: "ORDINAL", "TR" }}</span>
+                </div>
+            </a>
+
+            <div class="p-6 flex flex-col flex-1">
+                <div class="mb-auto">
+                    <h3 class="font-anton text-2xl mb-3 leading-snug group-hover:text-primary transition-colors">
+                        <a href="{{ post.url }}">
+                            {{ post.title }}
+                        </a>
+                    </h3>
+                    <p class="text-sm text-base-content/60 line-clamp-3">
+                        {% if post.description %}
+                            {{ post.description }}
+                        {% else %}
+                            {{ post.excerpt | strip_html | truncatewords: 20 }}
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-base-content/10 flex justify-between items-center">
+                    <div class="flex items-center gap-2 text-xs font-bold text-base-content/50">
+                        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-accent"></div>
+                        <span>{{ post.author | default: 'Yazar' }}</span>
+                    </div>
+                    <a href="{{ post.url }}" class="btn btn-circle btn-sm btn-ghost group-hover:bg-primary group-hover:text-primary-content transition-all duration-300">
+                        <i class="ai-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination Controls -->
+    {% if paginator.total_pages > 1 %}
+    <div class="mt-16 flex justify-center gap-2">
+      {% if paginator.previous_page %}
+      <a href="{{ paginator.previous_page_path }}" class="btn btn-outline btn-primary">
+          <i class="ai-arrow-left"></i> Önceki
+      </a>
+      {% else %}
+      <button class="btn btn-outline btn-disabled" disabled>
+          <i class="ai-arrow-left"></i> Önceki
+      </button>
+      {% endif %}
+
+      <div class="join hidden md:flex">
+           <button class="join-item btn btn-disabled">Sayfa {{ paginator.page }} / {{ paginator.total_pages }}</button>
+      </div>
+
+      {% if paginator.next_page %}
+      <a href="{{ paginator.next_page_path }}" class="btn btn-outline btn-primary">
+          Sonraki <i class="ai-arrow-right"></i>
+      </a>
+      {% else %}
+      <button class="btn btn-outline btn-disabled" disabled>
+          Sonraki <i class="ai-arrow-right"></i>
+      </button>
+      {% endif %}
+    </div>
+    {% endif %}
+
+</div>
