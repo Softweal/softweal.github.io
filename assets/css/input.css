@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Momo+Trust+Display&display=swap');
 @import "tailwindcss";
-@source "../../**/*.{html,js,md,markdown,yml}";
+
+@source "../../_includes/**/*.html";
+@source "../../_layouts/**/*.html";
+@source "../../_posts/**/*.{html,md,markdown}";
+@source "../../_projects/**/*.{html,md,markdown}";
+@source "../../_drafts/**/*.{html,md,markdown}";
+@source "../../pages/**/*.{html,md}";
+@source "../../assets/**/*.{html,md,markdown}";
+@source "../../*.{html,md,markdown}";
+@source "../../_data/**/*.yml";
 
 @plugin "@tailwindcss/typography";
 @plugin "daisyui";
@@ -17,11 +26,11 @@
 
 /* Mobile Typography Adjustments */
 @layer utilities {
-    .text-responsive-h1 {
+    .r-h1 {
         @apply text-5xl md:text-7xl lg:text-8xl;
     }
 
-    .text-responsive-h2 {
+    .r-h2 {
         @apply text-3xl md:text-5xl;
     }
 }

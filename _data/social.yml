@@ -1,0 +1,12 @@
+github:
+  url: https://github.com/
+  icon: ai-github-fill
+instagram:
+  url: https://instagram.com/
+  icon: ai-instagram-fill
+linkedin:
+  url: https://linkedin.com/
+  icon: ai-linkedin-fill
+url:
+  url: ""
+  icon: ai-globe

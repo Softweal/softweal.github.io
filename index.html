@@ -4,42 +4,48 @@ title: Ana Sayfa
 ---
 <div class="relative flex min-h-screen w-full items-center justify-center overflow-hidden">
   <div class="group">
-    <div class="
-      bg-primary group-hover:bg-secondary
-      absolute
-      top-1/2 left-1/2
-      -z-10 h-96
-      w-96
-      -translate-x-1/2 -translate-y-1/2 rounded-full
-      bg-gradient-to-br
-      opacity-60
-      blur-[100px]
-      transition-all
-      duration-1000 group-hover:opacity-70 group-hover:blur-[120px]
-      group-hover:scale-110
-    "></div>
-    <div class="relative z-10 px-8 text-center select-none">
-      <h1 class="
-        font-anton
-        from-secondary
-        to-primary
-        text-primary
-        mb-4 transform
-        bg-gradient-to-r
-        bg-clip-text
-        text-5xl md:text-7xl lg:text-8xl
-        font-bold
-        tracking-wider
+    <div
+      class="
+        bg-primary group-hover:bg-secondary
+        absolute
+        top-1/2 left-1/2
+        -z-10 h-96
+        w-96
+        -translate-x-1/2 -translate-y-1/2 rounded-full
+        bg-gradient-to-br
+        opacity-60
+        blur-[100px]
         transition-all
-        duration-1000
-        ease-in-out
-        group-hover:scale-110
-        group-hover:text-transparent
-      ">
+        duration-1000 group-hover:scale-110 group-hover:opacity-70
+        group-hover:blur-[120px]
+      "
+    ></div>
+    <div class="relative z-10 px-8 text-center select-none">
+      <h1
+        class="
+          font-anton
+          from-secondary
+          to-primary
+          text-primary
+          mb-4 transform
+          bg-gradient-to-r
+          bg-clip-text
+          text-5xl font-bold tracking-wider
+          transition-all
+          duration-1000
+          ease-in-out
+          group-hover:scale-110
+          group-hover:text-transparent
+          md:text-7xl
+          lg:text-8xl
+        "
+      >
         SOFTWEAL
       </h1>
 
-      <div x-data="{
+      <div
+        x-data="
+          {
               text: '',
               textArray : [
               'improve your web experiences',
@@ -54,7 +60,10 @@ title: Ana Sayfa
               pauseEnd: 1500,
               pauseStart: 20,
               direction: 'forward',
-          }" x-init="$nextTick(() => {
+          }
+        "
+        x-init="
+          $nextTick(() => {
               let typingInterval = setInterval(startTyping, $data.typeSpeed);
 
               function startTyping(){
@@ -106,86 +115,121 @@ title: Ana Sayfa
                   }
               }, $data.cursorSpeed);
 
-          })" class="flex items-center justify-center mx-auto text-center max-w-7xl min-h-20">
-        <div class="relative flex items-center justify-center h-auto">
-          <p class="text-2xl font-black leading-tight text-primary font-momo
-              md:text-xl
-              group-hover:scale-110
-              bg-gradient-to-r
+          })
+        "
+        class="mx-auto flex min-h-20 max-w-7xl items-center justify-center text-center"
+      >
+        <div class="relative flex h-auto items-center justify-center">
+          <p
+            class="
+              text-primary font-momo to-secondary from-primary bg-gradient-to-r
               bg-clip-text
-              to-secondary
-              from-primary
+              text-2xl
+              leading-tight
+              font-black
               transition-all
               duration-1000
               ease-in-out
-              group-hover:text-transparent" x-text="text"></p>
-          <span class="absolute right-0 w-1 -mr-2 bg-primary h-full" x-ref="cursor"></span>
+              group-hover:scale-110
+              group-hover:text-transparent
+              md:text-xl
+            "
+            x-text="text"
+          ></p>
+          <span class="bg-primary absolute right-0 -mr-2 h-full w-1" x-ref="cursor"></span>
         </div>
       </div>
 
       <div class="text-primary text-md mx-auto mt-16 max-w-4xl leading-relaxed">
         <p>© {{ 'now' | date: '%Y' }}</p>
       </div>
-
     </div>
   </div>
 </div>
 
-
-<div class="relative flex min-h-screen w-full justify-center overflow-hidden select-none">
+<div class="text-primary relative flex min-h-screen w-full justify-center overflow-hidden select-none">
   <div class="flex w-full max-w-6xl flex-col items-center justify-center gap-16 p-8">
-    <h1 class="text-3xl text-center font-anton">
-      YAZARLARIMIZ
-    </h1>
-    <div class="grid ">
-
+    <h1 class="font-anton text-center text-3xl">TAKIMIMIZ</h1>
+    <div class="grid grid-cols-2 gap-4">
       {% for author in site.authors %}
-      <div
-      class="card-animate card md:card-side bg-base-200 w-full opacity-0 shadow-xl border border-white/5 overflow-hidden group"
-      data-direction="{% cycle 'left', 'right' %}">
-      <figure>
-        <img src="/assets/avatars/{{ author.avatar }}" alt="{{ author.name }}"
-          class="object-cover select-none w-64 h-64 bg-gray-200 rounded cursor-zoom-in">
-      </figure>
-      <div class="card-body md:w-2/3 relative">
-        <h2 class="card-title text-3xl font-anton mb-2">{{ author.name }}</h2>
-        <p class="text-base-content/70 leading-relaxed">{{ author.position }}</p>
-        <p class="text-base-content/70 leading-relaxed">{{ author.excerpt | strip_html | truncatewords: 10 }}</p>
-        <div class="card-actions justify-end mt-4">
-          <a href="{{ author.url }}"
-            class="btn btn-primary btn-outline btn-sm gap-2 group-hover:bg-primary group-hover:text-white transition-all">
-            Profili Gör <i class="ai-arrow-right"></i>
-          </a>
+        <div
+          class="card-animate card md:card-side bg-base-200 group w-full overflow-hidden border border-white/5 opacity-0 shadow-xl"
+          data-direction="{% cycle 'left', 'right' %}"
+        >
+          <figure>
+            <a href="{{ author.url }}" class="h-full w-full">
+              <img
+                src="/assets/avatars/{{ author.avatar }}"
+                alt="{{ author.name }}"
+                class="h-64 w-64 rounded bg-gray-200 object-cover transition-all duration-200 ease-in-out select-none group-hover:scale-110"
+              >
+            </a>
+          </figure>
+          <div class="card-body relative md:w-2/3">
+            <a href="{{ author.url }}" class="block">
+              <h2 class="card-title font-anton group-hover:text-neutral mb-2 text-3xl transition-colors">
+                {{ author.name }}
+              </h2>
+              <p class="text-base-content/70 group-hover:text-neutral leading-relaxed transition-colors">
+                {{ author.position }}
+              </p>
+            </a>
+
+            <div class="card-actions justify-end">
+              {% for entry in author.social %}
+                {% assign platform = entry | first | first %}
+                {% assign handle = entry | first | last %}
+                {% assign config = site.data.social[platform] %}
+
+                {% if config %}
+                  {% assign final_url = config.url | append: handle %}
+                  {% if platform == 'url' %}
+                    {% assign final_url = handle %}
+                  {% endif %}
+
+                  <a
+                    href="{{ final_url }}"
+                    target="_blank"
+                    class="btn btn-ghost btn-circle btn-sm hover:bg-primary transition-all hover:text-white"
+                    title="{{ platform | capitalize }}"
+                  >
+                    <i class="{{ config.icon }} text-xl"></i>
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
         </div>
-      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
-  </div>
   </div>
 </div>
 
-<div x-data x-init="
-            $nextTick(() => {
-                const content = $refs.content;
-                const item = $refs.item;
-                const clone = item.cloneNode(true);
-                content.appendChild(clone);
-            });
-    " class="relative w-full container-block select-none space-y-4 py-24 bg-base-100">
-  <h1 class="text-3xl text-center font-anton mb-12">
-    SPONSORLARIMIZ
-  </h1>
+<div
+  x-data
+  x-init="
+    $nextTick(() => {
+        const content = $refs.content;
+        const item = $refs.item;
+        const clone = item.cloneNode(true);
+        content.appendChild(clone);
+    });
+  "
+  class="container-block bg-base-100 relative w-full space-y-4 py-24 select-none"
+>
+  <h1 class="font-anton mb-12 text-center text-3xl">SPONSORLARIMIZ</h1>
   <div
-    class="relative w-full py-4 mx-auto overflow-hidden text-lg italic tracking-wide text-primary-content uppercase bg-secondary max-w-7xl sm:text-xs md:text-sm lg:text-base xl:text-xl 2xl:text-2xl transform -rotate-1 hover:rotate-0 transition-transform duration-500 shadow-xl">
-    <div class="absolute left-0 z-20 w-40 h-full bg-gradient-to-r from-secondary to-transparent"></div>
-    <div class="absolute right-0 z-20 w-40 h-full bg-gradient-to-l from-secondary to-transparent"></div>
-    <div x-ref="content" class="flex animate-marquee">
-      <div x-ref="item" class="flex items-center justify-around flex-shrink-0 w-full py-2 space-x-12 text-white">
+    class="text-primary-content bg-secondary relative mx-auto w-full max-w-7xl -rotate-1 transform overflow-hidden py-4 text-lg tracking-wide uppercase italic shadow-xl transition-transform duration-500 hover:rotate-0 sm:text-xs md:text-sm lg:text-base xl:text-xl 2xl:text-2xl"
+  >
+    <div class="from-secondary absolute left-0 z-20 h-full w-40 bg-gradient-to-r to-transparent"></div>
+    <div class="from-secondary absolute right-0 z-20 h-full w-40 bg-gradient-to-l to-transparent"></div>
+    <div x-ref="content" class="animate-marquee flex">
+      <div x-ref="item" class="flex w-full flex-shrink-0 items-center justify-around space-x-12 py-2 text-white">
         {% for i in (1..4) %}
-        <span class="flex items-center gap-4 text-sm font-bold">
-          <i class="ai-star-filled"></i>
-          LÜTFEN SPONSOR OLMAK İÇİN İLETİŞİME GEÇİN
-        </span>
+          <span class="flex items-center gap-4 text-sm font-bold">
+            <i class="ai-star-filled"></i>
+            LÜTFEN SPONSOR OLMAK İÇİN İLETİŞİME GEÇİN
+          </span>
         {% endfor %}
       </div>
     </div>
@@ -194,21 +238,21 @@ title: Ana Sayfa
 
 <!-- Interactive Scripts -->
 <script>
-    if (typeof gsap !== 'undefined') {
-        // Staggered animation for grid
-        gsap.to(".card-animate", {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".card-animate",
-                start: "top 80%"
-            }
-        });
+  if (typeof gsap !== 'undefined') {
+    // Staggered animation for grid
+    gsap.to('.card-animate', {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.card-animate',
+        start: 'top 80%',
+      },
+    });
 
-        // Initial setup for animation
-        gsap.set(".card-animate", { y: 100, opacity: 0 });
-    }
+    // Initial setup for animation
+    gsap.set('.card-animate', { y: 100, opacity: 0 });
+  }
 </script>
