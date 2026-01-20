@@ -8,6 +8,7 @@ social:
   - instagram: emrekayik
   - linkedin: emrekayik
   - url: https://emrekayik.github.io
+bio: ""
 ---
 
 merhaba ben emre

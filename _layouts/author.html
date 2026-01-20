@@ -1,23 +1,64 @@
 ---
 layout: default
 ---
-<div class="avatar">
-  <div class="w-24 rounded-full">
-    <img src="/assets/avatars/{{ page.avatar }}" alt="{{ page.name }}">
-  </div>
+
+<!-- Ambient Background -->
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+    <div class="absolute top-[-10%] right-[20%] w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] opacity-40">
+    </div>
+    <div
+        class="absolute bottom-[20%] left-[-10%] w-[400px] h-[400px] bg-secondary/10 rounded-full blur-[100px] opacity-30">
+    </div>
 </div>
 
-<h1>{{ page.name }}</h1>
-<h2>{{ page.position }}</h2>
+<main class="pt-24 pb-16 lg:pt-32 lg:pb-32 min-h-screen">
+    <article class="container mx-auto px-4 max-w-4xl">
 
-{{ content }}
+        <!-- Article Header -->
+        <header class="mb-12 text-center animate-[fadeIn_1s_ease-out]">
+            <div class="flex items-center justify-center gap-4 mt-8">
+                <a href="{{ author.url }}" class="avatar group">
+                    <div
+                        class="w-36 h-36 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 transition-transform group-hover:scale-110">
+                        <img src="/assets/avatars/{{ page.avatar }}" alt="{{ author.name }}" />
+                    </div>
+                </a>
+            </div>
 
-<h2>Posts</h2>
-<ul>
-  {% assign filtered_posts = site.posts | where: 'author', page.short_name %}
-  {% for post in filtered_posts %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
+            <h1
+                 class="font-anton text-5xl md:text-6xl lg:text-7xl mb-8 leading-tight bg-gradient-to-br from-base-content to-base-content/60 bg-clip-text text-transparent">
+                {{ page.name }}
+            </h1>
+
+            <h3>{{ page.position }}</h3>
+        </header>
+
+        <div class="w-full h-px bg-gradient-to-r from-transparent via-base-content/10 to-transparent mb-12"></div>
+
+        <div class="prose prose-lg md:prose-xl mx-auto
+            prose-headings:font-anton prose-headings:text-base-content
+            prose-p:text-base-content/80 prose-p:leading-relaxed prose-p:font-light
+            prose-a:text-primary prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-secondary prose-strong:font-bold
+            prose-code:text-accent prose-code:bg-base-200 prose-code:px-1 prose-code:rounded
+            prose-blockquote:border-l-primary prose-blockquote:bg-base-200/50 prose-blockquote:p-4 prose-blockquote:rounded-r-lg
+            prose-img:rounded-2xl prose-img:shadow-2xl">
+            {{ content }}
+
+            <div class="flex items-center gap-4 mb-12 opacity-50">
+                <div class="h-px bg-current flex-1"></div>
+                <span class="font-momo text-sm">Yazıları</span>
+                <div class="h-px bg-current flex-1"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {% assign filtered_posts = site.posts | where: 'author', page.short_name %}
+              {% for post in filtered_posts %}
+                 <div class="card-animate opacity-0 h-full">
+                 </div>
+              {% endfor %}
+            </div>
+        </div>
+
+    </article>
+
+</main>
