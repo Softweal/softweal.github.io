@@ -6,186 +6,201 @@ pagination:
   enabled: true
   offset: 1
 ---
-
 <!-- Background Ambient Elements (matches index.html style) -->
-<div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-    <div
-        class="absolute top-[10%] right-[10%] w-96 h-96 bg-primary/20 rounded-full blur-[120px] opacity-40 animate-pulse">
-    </div>
-    <div class="absolute bottom-[10%] left-[10%] w-96 h-96 bg-secondary/20 rounded-full blur-[120px] opacity-40 animate-pulse"
-        style="animation-delay: 2s;"></div>
+<div class="pointer-events-none fixed top-0 left-0 -z-10 h-full w-full overflow-hidden">
+  <div
+    class="bg-primary/20 absolute top-[10%] right-[10%] h-96 w-96 animate-pulse rounded-full opacity-40 blur-[120px]"
+  ></div>
+  <div
+    class="bg-secondary/20 absolute bottom-[10%] left-[10%] h-96 w-96 animate-pulse rounded-full opacity-40 blur-[120px]"
+    style="animation-delay: 2s;"
+  ></div>
 </div>
 
-<div class="container mx-auto px-4 min-h-screen pt-24 pb-16">
+<div class="container mx-auto min-h-screen px-4 pt-24 pb-16">
+  <!-- Header Section -->
+  <div class="relative mb-16 text-center">
+    <h1
+      class="font-anton from-primary via-secondary to-accent mb-4 inline-block cursor-default bg-gradient-to-r bg-clip-text text-6xl text-transparent transition-transform duration-500 hover:scale-105 md:text-8xl"
+    >
+      BLOGLARIMIZ
+    </h1>
+  </div>
 
-    <!-- Header Section -->
-    <div class="text-center mb-16 relative">
-        <h1
-            class="font-anton text-6xl md:text-8xl mb-4 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent inline-block hover:scale-105 transition-transform duration-500 cursor-default">
-            BLOGLARIMIZ
-        </h1>
-    </div>
+  <!-- Featured Post (First Item) -->
+  {% assign featured = site.posts.first %}
+  {% if featured %}
+    <div class="card-animate mb-16 opacity-0">
+      <a
+        href="{{ featured.url }}"
+        class="group hover:shadow-primary/20 relative block overflow-hidden rounded-3xl border border-white/10 shadow-2xl transition-all duration-500 dark:border-white/5"
+      >
+        <!-- Background Blob for featured -->
+        <div
+          class="bg-accent/20 group-hover:bg-accent/30 absolute -top-20 -right-20 h-96 w-96 rounded-full blur-[80px] transition-all duration-500"
+        ></div>
 
-    <!-- Featured Post (First Item) -->
-    {% assign featured = site.posts.first %}
-    {% if featured %}
-    <div class="mb-16 card-animate opacity-0">
-        <a href="{{ featured.url }}"
-            class="group relative block overflow-hidden rounded-3xl border border-white/10 dark:border-white/5 shadow-2xl hover:shadow-primary/20 transition-all duration-500">
-            <!-- Background Blob for featured -->
+        <div class="bg-base-100/40 relative z-10 grid gap-0 backdrop-blur-md md:grid-cols-2">
+          <div class="order-2 flex h-full flex-col justify-center p-8 md:order-1 md:p-12">
+            <div class="text-primary mb-4 flex items-center gap-3 text-sm font-bold tracking-widest uppercase">
+              <span class="badge badge-primary badge-outline">{{ featured.date | localize: '%-d %b %Y' }}</span>
+              <span>ÖNERİLEN</span>
+            </div>
+            <h2
+              class="font-anton group-hover:text-primary mb-6 text-4xl leading-tight transition-colors duration-300 md:text-5xl lg:text-6xl"
+            >
+              {{ featured.title }}
+            </h2>
+            <p class="text-base-content/70 mb-8 line-clamp-3 text-lg font-light">
+              {% if featured.description %}
+                {{ featured.description }}
+              {% else %}
+                {{ featured.excerpt | strip_html | truncatewords: 30 }}
+              {% endif %}
+            </p>
             <div
-                class="absolute -right-20 -top-20 w-96 h-96 bg-accent/20 rounded-full blur-[80px] group-hover:bg-accent/30 transition-all duration-500">
+              class="text-secondary flex items-center gap-2 font-bold transition-transform duration-300 group-hover:translate-x-2"
+            >
+              OKUMAYA BAŞLA
+              <i class="ai-arrow-right"></i>
             </div>
+          </div>
+          <div class="bg-base-200 relative order-1 h-64 overflow-hidden md:order-2 md:h-auto">
+            <div
+              class="from-primary/20 to-secondary/20 absolute inset-0 z-10 bg-gradient-to-tr transition-opacity duration-500 group-hover:opacity-0"
+            ></div>
+            <!-- Abstract geometric pattern if no image -->
+            <div
+              class="bg-base-300 flex h-full w-full items-center justify-center transition-transform duration-1000 group-hover:scale-110"
+            >
+              <span class="font-anton text-9xl opacity-10 select-none">{{ featured.title | slice: 0 }}</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  {% endif %}
 
-            <div class="grid md:grid-cols-2 gap-0 relative z-10 bg-base-100/40 backdrop-blur-md">
-                <div class="p-8 md:p-12 flex flex-col justify-center h-full order-2 md:order-1">
-                    <div class="flex items-center gap-3 mb-4 text-sm font-bold tracking-widest text-primary uppercase">
-                        <span class="badge badge-primary badge-outline">{{ featured.date | localize: '%-d %b %Y'
-                            }}</span>
-                        <span>ÖNERİLEN</span>
-                    </div>
-                    <h2
-                        class="font-anton text-4xl md:text-5xl lg:text-6xl mb-6 leading-tight group-hover:text-primary transition-colors duration-300">
-                        {{ featured.title }}
-                    </h2>
-                    <p class="text-lg text-base-content/70 mb-8 line-clamp-3 font-light">
-                        {% if featured.description %}
-                        {{ featured.description }}
-                        {% else %}
-                        {{ featured.excerpt | strip_html | truncatewords: 30 }}
-                        {% endif %}
-                    </p>
-                    <div
-                        class="flex items-center gap-2 text-secondary font-bold group-hover:translate-x-2 transition-transform duration-300">
-                        OKUMAYA BAŞLA
-                        <i class="ai-arrow-right"></i>
-                    </div>
-                </div>
-                <div class="h-64 md:h-auto overflow-hidden relative order-1 md:order-2 bg-base-200">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 group-hover:opacity-0 transition-opacity duration-500 z-10">
-                    </div>
-                    <!-- Abstract geometric pattern if no image -->
-                    <div
-                        class="w-full h-full flex items-center justify-center bg-base-300 group-hover:scale-110 transition-transform duration-1000">
-                        <span class="font-anton text-9xl opacity-10 select-none">{{ featured.title | slice: 0 }}</span>
-                    </div>
-                </div>
-            </div>
+  <!-- Divider -->
+  <div class="mb-12 flex items-center gap-4 opacity-50">
+    <div class="h-px flex-1 bg-current"></div>
+    <span class="font-momo text-sm">SON YAZILAR</span>
+    <div class="h-px flex-1 bg-current"></div>
+  </div>
+
+  <!-- Other Posts Grid -->
+  <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+    {% for post in paginator.posts %}
+      <article
+        class="card-animate group bg-base-100/50 border-base-content/5 hover:border-primary/50 flex h-full flex-col overflow-hidden rounded-2xl border opacity-0 shadow-lg backdrop-blur-sm transition-colors duration-300 hover:shadow-xl"
+      >
+        <a href="{{ post.url }}" class="bg-base-200 relative block h-48 overflow-hidden">
+          <div
+            class="text-primary/10 group-hover:text-primary/20 absolute inset-0 flex items-center justify-center transition-colors duration-500"
+          >
+            <span class="font-anton text-8xl">{{ post.title | slice: 0 }}</span>
+          </div>
+          <div class="from-base-100 absolute inset-0 bg-gradient-to-t to-transparent opacity-60"></div>
+          <div class="absolute bottom-4 left-4">
+            <span class="badge badge-sm badge-neutral font-momo">
+              {{- post.date | date_to_string: 'ORDINAL', 'TR' -}}
+            </span>
+          </div>
         </a>
-    </div>
-    {% endif %}
 
-    <!-- Divider -->
-    <div class="flex items-center gap-4 mb-12 opacity-50">
-        <div class="h-px bg-current flex-1"></div>
-        <span class="font-momo text-sm">SON YAZILAR</span>
-        <div class="h-px bg-current flex-1"></div>
-    </div>
+        <div class="flex flex-1 flex-col p-6">
+          <div class="mb-auto">
+            <h3 class="font-anton group-hover:text-primary mb-3 text-2xl leading-snug transition-colors">
+              <a href="{{ post.url }}">
+                {{ post.title }}
+              </a>
+            </h3>
+            <p class="text-base-content/60 line-clamp-3 text-sm">
+              {% if post.description %}
+                {{ post.description }}
+              {% else %}
+                {{ post.excerpt | strip_html | truncatewords: 20 }}
+              {% endif %}
+            </p>
+          </div>
 
-    <!-- Other Posts Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {% for post in paginator.posts %}
-        <article
-            class="card-animate opacity-0 group flex flex-col h-full bg-base-100/50 backdrop-blur-sm border border-base-content/5 rounded-2xl overflow-hidden hover:border-primary/50 transition-colors duration-300 shadow-lg hover:shadow-xl">
-            <a href="{{ post.url }}" class="block overflow-hidden relative h-48 bg-base-200">
-                <div
-                    class="absolute inset-0 flex items-center justify-center text-primary/10 group-hover:text-primary/20 transition-colors duration-500">
-                    <span class="font-anton text-8xl">{{ post.title | slice: 0 }}</span>
-                </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-base-100 to-transparent opacity-60"></div>
-                <div class="absolute bottom-4 left-4">
-                    <span class="badge badge-sm badge-neutral font-momo">{{ post.date | date_to_string: "ORDINAL", "TR"}}</span>
-                </div>
-            </a>
-
-            <div class="p-6 flex flex-col flex-1">
-                <div class="mb-auto">
-                    <h3 class="font-anton text-2xl mb-3 leading-snug group-hover:text-primary transition-colors">
-                        <a href="{{ post.url }}">
-                            {{ post.title }}
-                        </a>
-                    </h3>
-                    <p class="text-sm text-base-content/60 line-clamp-3">
-                        {% if post.description %}
-                        {{ post.description }}
-                        {% else %}
-                        {{ post.excerpt | strip_html | truncatewords: 20 }}
-                        {% endif %}
-                    </p>
-                </div>
-
-                <div class="mt-6 pt-4 border-t border-base-content/10 flex justify-between items-center">
-                    <div class="flex items-center gap-2 text-xs font-bold text-base-content/50">
-                        <div class="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-accent"></div>
-                        <span>{{ post.author | default: 'Yazar' }}</span>
-                    </div>
-                    <a href="{{ post.url }}"
-                        class="btn btn-circle btn-sm btn-ghost group-hover:bg-primary group-hover:text-primary-content transition-all duration-300">
-                        <i class="ai-arrow-right"></i>
-                    </a>
-                </div>
+          <div class="border-base-content/10 mt-6 flex items-center justify-between border-t pt-4">
+            <div class="text-base-content/50 flex items-center gap-2 text-xs font-bold">
+              {% assign author_obj = site.authors | where: 'short_name', post.author | first %}
+              {% if author_obj %}
+                <img
+                  src="/assets/avatars/{{ author_obj.avatar }}"
+                  alt="{{ author_obj.name }}"
+                  class="from-primary to-accent h-6 w-6 rounded-full bg-gradient-to-br object-cover"
+                >
+              {% else %}
+                <div class="from-primary to-accent h-6 w-6 rounded-full bg-gradient-to-br"></div>
+              {% endif %}
+              <span>{{ author_obj.name | default: post.author | default: 'Yazar' }}</span>
             </div>
-        </article>
-        {% endfor %}
-    </div>
+            <a
+              href="{{ post.url }}"
+              class="btn btn-circle btn-sm btn-ghost group-hover:bg-primary group-hover:text-primary-content transition-all duration-300"
+            >
+              <i class="ai-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </div>
 
-    <!-- Pagination Controls -->
-    {% if paginator.total_pages > 1 %}
+  <!-- Pagination Controls -->
+  {% if paginator.total_pages > 1 %}
     <div class="mt-16 flex justify-center gap-2">
       {% if paginator.previous_page %}
-      <a href="{{ paginator.previous_page_path }}" class="btn btn-outline btn-primary">
+        <a href="{{ paginator.previous_page_path }}" class="btn btn-outline btn-primary">
           <i class="ai-arrow-left"></i> Önceki
-      </a>
+        </a>
       {% else %}
-      <button class="btn btn-outline btn-disabled" disabled>
-          <i class="ai-arrow-left"></i> Önceki
-      </button>
+        <button class="btn btn-outline btn-disabled" disabled><i class="ai-arrow-left"></i> Önceki</button>
       {% endif %}
 
       <div class="join hidden md:flex">
-          {% for page in (1..paginator.total_pages) %}
-            {% if page == paginator.page %}
-              <button class="join-item btn btn-active btn-primary">{{ page }}</button>
-            {% elsif page == 1 %}
-              <a href="/blog/" class="join-item btn btn-outline">{{ page }}</a>
-            {% else %}
-              <a href="{{ site.paginate_path | replace: ':num', page }}" class="join-item btn btn-outline">{{ page }}</a>
-            {% endif %}
-          {% endfor %}
+        {% for page in (1..paginator.total_pages) %}
+          {% if page == paginator.page %}
+            <button class="join-item btn btn-active btn-primary">{{ page }}</button>
+          {% elsif page == 1 %}
+            <a href="/blog/" class="join-item btn btn-outline">{{ page }}</a>
+          {% else %}
+            <a href="{{ site.paginate_path | replace: ':num', page }}" class="join-item btn btn-outline">{{ page }}</a>
+          {% endif %}
+        {% endfor %}
       </div>
 
       {% if paginator.next_page %}
-      <a href="{{ paginator.next_page_path }}" class="btn btn-outline btn-primary">
+        <a href="{{ paginator.next_page_path }}" class="btn btn-outline btn-primary">
           Sonraki <i class="ai-arrow-right"></i>
-      </a>
+        </a>
       {% else %}
-      <button class="btn btn-outline btn-disabled" disabled>
-          Sonraki <i class="ai-arrow-right"></i>
-      </button>
+        <button class="btn btn-outline btn-disabled" disabled>Sonraki <i class="ai-arrow-right"></i></button>
       {% endif %}
     </div>
-    {% endif %}
-
+  {% endif %}
 </div>
 
 <!-- Interactive Scripts -->
 <script>
-    if (typeof gsap !== 'undefined') {
-        // Staggered animation for grid
-        gsap.to(".card-animate", {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out",
-            scrollTrigger: {
-                trigger: ".container",
-                start: "top 80%"
-            }
-        });
+  if (typeof gsap !== 'undefined') {
+    // Staggered animation for grid
+    gsap.to('.card-animate', {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.2,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: '.container',
+        start: 'top 80%',
+      },
+    });
 
-        // Initial setup for animation
-        gsap.set(".card-animate", { y: 100, opacity: 0 });
-    }
+    // Initial setup for animation
+    gsap.set('.card-animate', { y: 100, opacity: 0 });
+  }
 </script>
