@@ -2,7 +2,7 @@
 layout: post
 title: "Softweal Website"
 description: "Kurumsal web sitemizin modernizasyonu ve yenilenmesi projesi."
-date: 2026-+0-14
+date: 2026-02-14
 img: assets/img/forchess.png
 
 author: Softweal Team
