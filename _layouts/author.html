@@ -132,6 +132,83 @@ layout: default
           </article>
         {% endfor %}
       </div>
+
+      <div class="mb-12 flex items-center gap-4 opacity-50">
+        <div class="h-px flex-1 bg-current"></div>
+        <span class="font-momo text-sm">Projeleri</span>
+        <div class="h-px flex-1 bg-current"></div>
+      </div>
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {% assign filtered_projects = site.projects | where: 'author', page.short_name %}
+        {% for project in filtered_projects %}
+          <article
+            class="card-animate group bg-base-100/50 border-base-content/5 hover:border-primary/50 flex h-full flex-col overflow-hidden rounded-xl border opacity-0 shadow-lg backdrop-blur-sm transition-colors duration-300 hover:shadow-xl"
+          >
+            <a href="{{ project.url }}" class="bg-base-200 relative block h-32 overflow-hidden">
+              <div
+                class="text-primary/10 group-hover:text-primary/20 absolute inset-0 flex items-center justify-center transition-colors duration-500"
+              >
+                {% if project.lottie %}
+                  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                  <lottie-player
+                    src="{{ project.lottie }}"
+                    background="transparent"
+                    speed="1"
+                    style="width: 100%; height: 100%;"
+                    loop
+                    autoplay
+                  ></lottie-player>
+                {% elsif project.image %}
+                  <img
+                    src="{{ project.image }}"
+                    alt="{{ project.title }}"
+                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  >
+                {% else %}
+                  <span class="font-anton text-6xl">{{ project.title | slice: 0 }}</span>
+                {% endif %}
+              </div>
+              <div class="from-base-100 absolute inset-0 bg-gradient-to-t to-transparent opacity-60"></div>
+              <div class="absolute bottom-2 left-4">
+                <span class="badge badge-sm badge-neutral font-momo">
+                  {{- project.date | date_to_string: 'ORDINAL', 'TR' -}}
+                </span>
+              </div>
+            </a>
+
+            <div class="flex flex-1 flex-col p-4">
+              <div class="mb-auto">
+                <h3 class="font-anton group-hover:text-primary mb-2 text-xl leading-tight transition-colors">
+                  <a href="{{ project.url }}">
+                    {{ project.title }}
+                  </a>
+                </h3>
+                <p class="text-base-content/60 line-clamp-2 text-sm">
+                  {% if project.description %}
+                    {{ project.description }}
+                  {% else %}
+                    {{ project.excerpt | strip_html | truncatewords: 20 }}
+                  {% endif %}
+                </p>
+              </div>
+
+              <div class="border-base-content/10 mt-4 flex items-center justify-between border-t pt-3">
+                <div class="flex flex-wrap gap-2">
+                  {% for tag in project.tags limit: 2 %}
+                    <span class="badge badge-xs badge-outline opacity-70">{{ tag }}</span>
+                  {% endfor %}
+                </div>
+                <a
+                  href="{{ project.url }}"
+                  class="btn btn-circle btn-xs btn-ghost group-hover:bg-primary group-hover:text-primary-content transition-all duration-300"
+                >
+                  <i class="ai-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
     </div>
   </article>
 </main>
