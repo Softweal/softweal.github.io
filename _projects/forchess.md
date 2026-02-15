@@ -8,6 +8,7 @@ image: /assets/img/forchess.png
 author: beratkoc
 technologies: [Nextjs, TypeScript, TailwindCSS]
 repo: https://github.com/beratkc/forchess
+demo: https://forchess.vercel.app/
 ---
 
 ForChess, satranç açılışlarını öğrenmek ve ustalaşmak isteyenler için hazırlanmış kapsamlı bir rehberdir. İster yeni başlayan ister deneyimli bir oyuncu olun, bu platform size en popüler açılışları görsel ve interaktif bir şekilde sunar.
