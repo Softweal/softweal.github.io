@@ -1,12 +1,13 @@
 ---
-layout: post
+layout: project
 title: "ForChess"
 description: "Satranç Açılışları Rehberiniz"
 date: 2026-02-14
-img: assets/img/forchess.png
+image: /assets/img/forchess.png
 
-author: Softweal Team
-technologies: [Jekyll, TailwindCSS, GSAP]
+author: beratkoc
+technologies: [Nextjs, TypeScript, TailwindCSS]
+repo: https://github.com/beratkc/forchess
 ---
 
 ForChess, satranç açılışlarını öğrenmek ve ustalaşmak isteyenler için hazırlanmış kapsamlı bir rehberdir. İster yeni başlayan ister deneyimli bir oyuncu olun, bu platform size en popüler açılışları görsel ve interaktif bir şekilde sunar.
