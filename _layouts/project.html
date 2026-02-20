@@ -3,12 +3,11 @@ layout: default
 ---
 <!-- Ambient Background -->
 <div class="pointer-events-none fixed top-0 left-0 -z-10 h-full w-full overflow-hidden">
+  <div class="bg-primary/10 absolute top-[-10%] right-[20%] h-[500px] w-[500px] rounded-full opacity-40 blur-[120px]">
+  </div>
   <div
-    class="bg-primary/10 absolute top-[-10%] right-[20%] h-[500px] w-[500px] rounded-full opacity-40 blur-[120px]"
-  ></div>
-  <div
-    class="bg-secondary/10 absolute bottom-[20%] left-[-10%] h-[400px] w-[400px] rounded-full opacity-30 blur-[100px]"
-  ></div>
+    class="bg-secondary/10 absolute bottom-[20%] left-[-10%] h-[400px] w-[400px] rounded-full opacity-30 blur-[100px]">
+  </div>
 </div>
 
 <main class="min-h-screen pt-24 pb-16 lg:pt-32 lg:pb-32">
@@ -16,82 +15,78 @@ layout: default
     <!-- Project Header -->
     <header class="mb-12 animate-[fadeIn_1s_ease-out] text-center">
       <div
-        class="text-secondary/80 font-momo mb-6 flex items-center justify-center gap-4 text-sm font-bold tracking-widest uppercase"
-      >
+        class="text-secondary/80 font-momo mb-6 flex items-center justify-center gap-4 text-sm font-bold tracking-widest uppercase">
         <span class="badge badge-outline badge-primary">
-          {{ page.date | localize: '%-d %B %Y' }}
+          {% assign m = page.date | date: "%-m" %}
+          {{ page.date | date: "%-d" }}
+          {% case m %}
+          {% when '1' %}Ocak
+          {% when '2' %}Şubat
+          {% when '3' %}Mart
+          {% when '4' %}Nisan
+          {% when '5' %}Mayıs
+          {% when '6' %}Haziran
+          {% when '7' %}Temmuz
+          {% when '8' %}Ağustos
+          {% when '9' %}Eylül
+          {% when '10' %}Ekim
+          {% when '11' %}Kasım
+          {% when '12' %}Aralık
+          {% endcase %}
+          {{ page.date | date: "%Y" }}
         </span>
         {% if page.status %}
-          <span class="badge badge-ghost">{{ page.status }}</span>
+        <span class="badge badge-ghost">{{ page.status }}</span>
         {% endif %}
       </div>
 
       <h1
-        class="font-anton from-base-content to-base-content/60 mb-6 bg-gradient-to-br bg-clip-text text-5xl leading-tight text-transparent md:text-7xl lg:text-8xl"
-      >
+        class="font-anton from-base-content to-base-content/60 mb-6 bg-gradient-to-br bg-clip-text text-5xl leading-tight text-transparent md:text-7xl lg:text-8xl">
         {{ page.title | escape }}
       </h1>
 
       {% if page.description %}
-        <p class="text-base-content/70 font-roboto mx-auto max-w-2xl text-lg leading-relaxed font-light md:text-xl">
-          {{ page.description }}
-        </p>
+      <p class="text-base-content/70 font-roboto mx-auto max-w-2xl text-lg leading-relaxed font-light md:text-xl">
+        {{ page.description }}
+      </p>
       {% endif %}
 
       {% if page.technologies %}
-        <div class="mt-8 flex flex-wrap justify-center gap-2">
-          {% for tech in page.technologies %}
-            <span class="badge badge-lg badge-secondary badge-outline font-mono">{{ tech }}</span>
-          {% endfor %}
-        </div>
+      <div class="mt-8 flex flex-wrap justify-center gap-2">
+        {% for tech in page.technologies %}
+        <span class="badge badge-lg badge-secondary badge-outline font-mono">{{ tech }}</span>
+        {% endfor %}
+      </div>
       {% endif %}
 
       {% if page.repo or page.demo %}
-        <div class="mt-8 flex items-center justify-center gap-4">
-          {% if page.repo %}
-            <a
-              href="{{ page.repo }}"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-primary btn-outline group gap-2"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="transition-transform group-hover:scale-110"
-              >
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-              </svg>
-              GitHub
-            </a>
-          {% endif %}
-          {% if page.demo %}
-            <a href="{{ page.demo }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary group gap-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="transition-transform group-hover:scale-110"
-              >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line>
-              </svg>
-              Canlı Demo
-            </a>
-          {% endif %}
-        </div>
+      <div class="mt-8 flex items-center justify-center gap-4">
+        {% if page.repo %}
+        <a href="{{ page.repo }}" target="_blank" rel="noopener noreferrer"
+          class="btn btn-primary btn-outline group gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="transition-transform group-hover:scale-110">
+            <path
+              d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+            </path>
+          </svg>
+          GitHub
+        </a>
+        {% endif %}
+        {% if page.demo %}
+        <a href="{{ page.demo }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary group gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="transition-transform group-hover:scale-110">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+          Canlı Demo
+        </a>
+        {% endif %}
+      </div>
       {% endif %}
 
       <!-- Author -->
@@ -99,51 +94,39 @@ layout: default
       {% assign author = site.authors | where: 'short_name', author_id | first %}
       <div class="text-base-content/60 mt-8 flex items-center justify-center gap-3 text-sm">
         {% if author %}
-          <a href="{{ author.url }}" class="avatar group">
-            <div
-              class="ring-primary ring-offset-base-100 h-36 w-36 rounded-full ring ring-offset-2 transition-transform group-hover:scale-110"
-            >
-              <img src="/assets/avatars/{{ author.avatar }}" alt="{{ author.name }}">
-            </div>
-          </a>
-          <span
-            ><span class="text-base-content font-bold">{{ author.name }}</span> Tarafından Geliştirildi</span
-          >
+        <a href="{{ author.url }}" class="avatar group">
+          <div
+            class="ring-primary ring-offset-base-100 h-36 w-36 rounded-full ring ring-offset-2 transition-transform group-hover:scale-110">
+            <img src="/assets/avatars/{{ author.avatar }}" alt="{{ author.name }}">
+          </div>
+        </a>
+        <span><span class="text-base-content font-bold">{{ author.name }}</span> Tarafından Geliştirildi</span>
         {% elsif page.author %}
-          <span
-            ><span class="text-base-content font-bold">{{ page.author }}</span> Tarafından Geliştirildi</span
-          >
+        <span><span class="text-base-content font-bold">{{ page.author }}</span> Tarafından Geliştirildi</span>
         {% endif %}
       </div>
     </header>
 
     <!-- Visual Element -->
     {% if page.lottie or page.image %}
-      <div class="rounded-box bg-base-200/50 border-base-content/5 mb-16 overflow-hidden border shadow-2xl">
-        {% if page.lottie %}
-          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-          <div class="flex items-center justify-center p-8 md:p-12">
-            <lottie-player
-              src="{{ page.lottie }}"
-              background="transparent"
-              speed="1"
-              style="width: 100%; max-width: 600px; height: auto;"
-              loop
-              autoplay
-            ></lottie-player>
-          </div>
-        {% elsif page.image %}
-          <img src="{{ page.image }}" alt="{{ page.title }}" class="h-auto w-full object-cover">
-        {% endif %}
+    <div class="rounded-box bg-base-200/50 border-base-content/5 mb-16 overflow-hidden border shadow-2xl">
+      {% if page.lottie %}
+      <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+      <div class="flex items-center justify-center p-8 md:p-12">
+        <lottie-player src="{{ page.lottie }}" background="transparent" speed="1"
+          style="width: 100%; max-width: 600px; height: auto;" loop autoplay></lottie-player>
       </div>
+      {% elsif page.image %}
+      <img src="{{ page.image }}" alt="{{ page.title }}" class="h-auto w-full object-cover">
+      {% endif %}
+    </div>
     {% endif %}
 
     <!-- Divider -->
     <div class="via-base-content/10 mb-12 h-px w-full bg-gradient-to-r from-transparent to-transparent"></div>
 
     <!-- Content -->
-    <div
-      class="
+    <div class="
         prose prose-lg md:prose-xl prose-headings:font-anton
         prose-headings:text-base-content prose-p:text-base-content/80
         prose-p:leading-relaxed prose-p:font-light prose-a:text-primary
@@ -152,8 +135,7 @@ layout: default
         prose-code:bg-base-200 prose-code:px-1 prose-code:rounded prose-blockquote:border-l-primary
         prose-blockquote:bg-base-200/50 prose-blockquote:p-4 prose-blockquote:rounded-r-lg prose-img:rounded-2xl
         prose-img:shadow-2xl mx-auto
-      "
-    >
+      ">
       {{ content }}
     </div>
   </article>

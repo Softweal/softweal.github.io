@@ -5,21 +5,18 @@ permalink: /projects/
 ---
 <!-- Background Ambient Elements -->
 <div class="pointer-events-none fixed top-0 left-0 -z-10 h-full w-full overflow-hidden">
-  <div
-    class="bg-primary/20 absolute top-[20%] left-[20%] h-96 w-96 animate-pulse rounded-full opacity-30 blur-[120px]"
-  ></div>
+  <div class="bg-primary/20 absolute top-[20%] left-[20%] h-96 w-96 animate-pulse rounded-full opacity-30 blur-[120px]">
+  </div>
   <div
     class="bg-accent/20 absolute right-[20%] bottom-[20%] h-96 w-96 animate-pulse rounded-full opacity-30 blur-[120px]"
-    style="animation-delay: 2s;"
-  ></div>
+    style="animation-delay: 2s;"></div>
 </div>
 
 <div class="container mx-auto min-h-screen px-4 pt-24 pb-16">
   <!-- Header Section -->
   <div class="relative mb-16 text-center">
     <h1
-      class="font-anton from-accent via-primary to-secondary mb-4 inline-block cursor-default bg-gradient-to-r bg-clip-text text-6xl text-transparent transition-transform duration-500 hover:scale-105 md:text-8xl"
-    >
+      class="font-anton from-accent via-primary to-secondary mb-4 inline-block cursor-default bg-gradient-to-r bg-clip-text text-6xl text-transparent transition-transform duration-500 hover:scale-105 md:text-8xl">
       PROJELERİMİZ
     </h1>
     <p class="text-base-content/60 mx-auto mt-4 max-w-2xl text-xl font-light">
@@ -28,75 +25,82 @@ permalink: /projects/
   </div>
 
   <!-- Featured Project (First Item) -->
-  {% assign featured = site.projects.first %}
+  {% assign sorted_projects = site.projects | sort: 'date' | reverse %}
+  {% assign featured = sorted_projects.first %}
   {% if featured %}
-    <div class="card-animate mb-16 opacity-0">
-      <a
-        href="{{ featured.url }}"
-        class="group hover:shadow-accent/20 relative block overflow-hidden rounded-3xl border border-white/10 shadow-2xl transition-all duration-500 dark:border-white/5"
-      >
-        <!-- Background Blob -->
-        <div
-          class="bg-secondary/20 group-hover:bg-secondary/30 absolute -bottom-20 -left-20 h-96 w-96 rounded-full blur-[80px] transition-all duration-500"
-        ></div>
+  <div class="card-animate mb-16 opacity-0">
+    <a href="{{ featured.url }}"
+      class="group hover:shadow-accent/20 relative block overflow-hidden rounded-3xl border border-white/10 shadow-2xl transition-all duration-500 dark:border-white/5">
+      <!-- Background Blob -->
+      <div
+        class="bg-secondary/20 group-hover:bg-secondary/30 absolute -bottom-20 -left-20 h-96 w-96 rounded-full blur-[80px] transition-all duration-500">
+      </div>
 
-        <div class="bg-base-100/40 relative z-10 grid gap-0 backdrop-blur-md md:grid-cols-2">
-          <div class="bg-base-200 relative order-1 h-64 overflow-hidden md:h-auto">
-            <div
-              class="from-accent/20 to-primary/20 absolute inset-0 z-10 bg-gradient-to-br transition-opacity duration-500 group-hover:opacity-0"
-            ></div>
-            <div
-              class="bg-base-300 flex h-full w-full items-center justify-center transition-transform duration-1000 group-hover:scale-110"
-            >
-              {% if featured.lottie %}
-                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-                <lottie-player
-                  src="{{ featured.lottie }}"
-                  background="transparent"
-                  speed="1"
-                  style="width: 100%; height: 100%;"
-                  loop
-                  autoplay
-                ></lottie-player>
-              {% elsif featured.image %}
-                <img src="{{ featured.image }}" alt="{{ featured.title }}" class="h-full w-full object-cover">
-              {% else %}
-                <span class="font-anton text-9xl opacity-10 select-none">{{ featured.title | slice: 0 }}</span>
-              {% endif %}
-            </div>
+      <div class="bg-base-100/40 relative z-10 grid gap-0 backdrop-blur-md md:grid-cols-2">
+        <div class="bg-base-200 relative order-1 h-64 overflow-hidden md:h-auto">
+          <div
+            class="from-accent/20 to-primary/20 absolute inset-0 z-10 bg-gradient-to-br transition-opacity duration-500 group-hover:opacity-0">
           </div>
-
-          <div class="order-2 flex h-full flex-col justify-center p-8 md:p-12">
-            <div class="text-accent mb-4 flex items-center gap-3 text-sm font-bold tracking-widest uppercase">
-              <span class="badge badge-accent badge-outline">SON PROJE</span>
-            </div>
-            <h2
-              class="font-anton group-hover:text-accent mb-6 text-4xl leading-tight transition-colors duration-300 md:text-5xl lg:text-6xl"
-            >
-              {{ featured.title }}
-            </h2>
-            <p class="text-base-content/70 mb-8 line-clamp-3 text-lg font-light">
-              {{ featured.description }}
-            </p>
-
-            {% if featured.technologies %}
-              <div class="mb-8 flex flex-wrap gap-2">
-                {% for tech in featured.technologies %}
-                  <span class="badge badge-outline opacity-60">{{ tech }}</span>
-                {% endfor %}
-              </div>
+          <div
+            class="bg-base-300 flex h-full w-full items-center justify-center transition-transform duration-1000 group-hover:scale-110">
+            {% if featured.lottie %}
+            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+            <lottie-player src="{{ featured.lottie }}" background="transparent" speed="1"
+              style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+            {% elsif featured.image %}
+            <img src="{{ featured.image }}" alt="{{ featured.title }}" class="h-full w-full object-cover">
+            {% else %}
+            <span class="font-anton text-9xl opacity-10 select-none">{{ featured.title | slice: 0 }}</span>
             {% endif %}
-
-            <div
-              class="text-primary flex items-center gap-2 font-bold transition-transform duration-300 group-hover:translate-x-2"
-            >
-              İNCELE
-              <i class="ai-arrow-right"></i>
-            </div>
           </div>
         </div>
-      </a>
-    </div>
+
+        <div class="order-2 flex h-full flex-col justify-center p-8 md:p-12">
+          <div class="text-accent mb-4 flex items-center gap-3 text-sm font-bold tracking-widest uppercase">
+            <span class="badge badge-accent badge-outline">SON PROJE</span>
+          </div>
+          <h2
+            class="font-anton group-hover:text-accent mb-6 text-4xl leading-tight transition-colors duration-300 md:text-5xl lg:text-6xl">
+            {{ featured.title }}
+          </h2>
+          <p class="text-base-content/70 mb-8 line-clamp-3 text-lg font-light">
+            {{ featured.description }}
+          </p>
+
+          {% assign featured_author_id = featured.author %}
+          {% assign featured_author = site.authors | where: 'short_name', featured_author_id | first %}
+          <div class="mb-6 flex items-center gap-3">
+            {% if featured_author %}
+            <div class="avatar">
+              <div class="ring-primary ring-offset-base-100 w-8 rounded-full ring ring-offset-2">
+                <img src="/assets/avatars/{{ featured_author.avatar }}" alt="{{ featured_author.name }}" />
+              </div>
+            </div>
+            <span class="text-base-content/70 text-sm"><span class="text-base-content font-bold">{{ featured_author.name
+                }}</span> Tarafından</span>
+            {% elsif featured.author %}
+            <span class="text-base-content/70 text-sm"><span class="text-base-content font-bold">{{ featured.author
+                }}</span> Tarafından</span>
+            {% endif %}
+          </div>
+
+          {% if featured.technologies %}
+          <div class="mb-8 flex flex-wrap gap-2">
+            {% for tech in featured.technologies %}
+            <span class="badge badge-outline opacity-60">{{ tech }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <div
+            class="text-primary flex items-center gap-2 font-bold transition-transform duration-300 group-hover:translate-x-2">
+            İNCELE
+            <i class="ai-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
   {% endif %}
 
   <!-- Divider -->
@@ -108,71 +112,71 @@ permalink: /projects/
 
   <!-- Other Projects Grid -->
   <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-    {% for project in site.projects offset: 1 %}
-      <article
-        class="card-animate group bg-base-100/50 border-base-content/5 hover:border-accent/50 flex h-full flex-col overflow-hidden rounded-2xl border opacity-0 shadow-lg backdrop-blur-sm transition-colors duration-300 hover:shadow-xl"
-      >
-        <a href="{{ project.url }}" class="bg-base-200 relative block h-48 overflow-hidden">
-          <div
-            class="text-accent/10 group-hover:text-accent/20 absolute inset-0 flex items-center justify-center transition-colors duration-500"
-          >
-            {% if project.lottie %}
-              <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-              <lottie-player
-                src="{{ project.lottie }}"
-                background="transparent"
-                speed="1"
-                style="width: 100%; height: 100%;"
-                loop
-                autoplay
-              ></lottie-player>
-            {% elsif project.image %}
-              <img
-                src="{{ project.image }}"
-                alt="{{ project.title }}"
-                class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              >
-            {% else %}
-              <span class="font-anton text-8xl">{{ project.title | slice: 0 }}</span>
+    {% for project in sorted_projects offset: 1 %}
+    <article
+      class="card-animate group bg-base-100/50 border-base-content/5 hover:border-accent/50 flex h-full flex-col overflow-hidden rounded-2xl border opacity-0 shadow-lg backdrop-blur-sm transition-colors duration-300 hover:shadow-xl">
+      <a href="{{ project.url }}" class="bg-base-200 relative block h-48 overflow-hidden">
+        <div
+          class="text-accent/10 group-hover:text-accent/20 absolute inset-0 flex items-center justify-center transition-colors duration-500">
+          {% if project.lottie %}
+          <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+          <lottie-player src="{{ project.lottie }}" background="transparent" speed="1"
+            style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+          {% elsif project.image %}
+          <img src="{{ project.image }}" alt="{{ project.title }}"
+            class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110">
+          {% else %}
+          <span class="font-anton text-8xl">{{ project.title | slice: 0 }}</span>
+          {% endif %}
+        </div>
+        <div class="from-base-100 absolute inset-0 bg-gradient-to-t to-transparent opacity-60"></div>
+      </a>
+
+      <div class="flex flex-1 flex-col p-6">
+        <div class="mb-auto">
+          <h3 class="font-anton group-hover:text-accent mb-3 text-2xl leading-snug transition-colors">
+            <a href="{{ project.url }}">
+              {{ project.title }}
+            </a>
+          </h3>
+          <p class="text-base-content/60 line-clamp-3 text-sm">
+            {{ project.description }}
+          </p>
+        </div>
+
+        {% if project.technologies %}
+        <div class="mt-4 flex flex-wrap gap-1">
+          {% for tech in project.technologies limit: 3 %}
+          <span class="text-base-content/40 bg-base-content/5 rounded px-2 py-1 text-[10px] font-bold uppercase">
+            {{- tech -}}
+          </span>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="border-base-content/10 mt-6 flex items-center justify-between border-t pt-4">
+          {% assign author_id = project.author %}
+          {% assign author = site.authors | where: 'short_name', author_id | first %}
+          <div class="flex items-center gap-2">
+            {% if author %}
+            <div class="avatar">
+              <div class="w-6 rounded-full">
+                <img src="/assets/avatars/{{ author.avatar }}" alt="{{ author.name }}" />
+              </div>
+            </div>
+            <span class="text-base-content/70 text-xs">{{ author.name }}</span>
+            {% elsif project.author %}
+            <span class="text-base-content/70 text-xs">{{ project.author }}</span>
             {% endif %}
           </div>
-          <div class="from-base-100 absolute inset-0 bg-gradient-to-t to-transparent opacity-60"></div>
-        </a>
 
-        <div class="flex flex-1 flex-col p-6">
-          <div class="mb-auto">
-            <h3 class="font-anton group-hover:text-accent mb-3 text-2xl leading-snug transition-colors">
-              <a href="{{ project.url }}">
-                {{ project.title }}
-              </a>
-            </h3>
-            <p class="text-base-content/60 line-clamp-3 text-sm">
-              {{ project.description }}
-            </p>
-          </div>
-
-          {% if project.technologies %}
-            <div class="mt-4 flex flex-wrap gap-1">
-              {% for tech in project.technologies limit: 3 %}
-                <span
-                  class="text-base-content/40 bg-base-content/5 rounded px-2 py-1 text-[10px] font-bold uppercase"
-                >
-                  {{- tech -}}
-                </span>
-              {% endfor %}
-            </div>
-          {% endif %}
-
-          <div class="border-base-content/10 mt-6 flex items-center justify-end border-t pt-4">
-            <a
-              href="{{ project.url }}"
-              class="btn btn-circle btn-sm btn-ghost group-hover:bg-accent transition-all duration-300 group-hover:text-white"
-            >
-              <i class="ai-arrow-right"></i>
-            </a>
-          </div>
+          <a href="{{ project.url }}"
+            class="btn btn-circle btn-sm btn-ghost group-hover:bg-accent transition-all duration-300 group-hover:text-white">
+            <i class="ai-arrow-right"></i>
+          </a>
         </div>
-      </article>
+      </div>
+    </article>
     {% endfor %}
   </div>
 </div>

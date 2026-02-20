@@ -30,3 +30,4 @@ gem 'wdm', '>= 0.1.0', platforms: [:windows]
 
 gem "base64", "~> 0.3.0"
 gem "bigdecimal", "~> 3.3"
+gem "ostruct"
