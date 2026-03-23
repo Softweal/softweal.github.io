@@ -3,7 +3,7 @@ layout: project
 title: "orbitsync"
 description: "Alıntılarınız, her yerde.(Your snippets, everywhere.)"
 date: 2026-03-20
-image: /assets/img/orbitspace.png
+image: /assets/img/orbitsync.png
 
 author: emrekayik
 technologies: [Nextjs, TypeScript, TailwindCSS, Shadcn, Evolu, CodeMirror, Vitest]
